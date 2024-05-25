@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">E - IQRA</string>
+    <string name="login_hint_password">Enter your password</string>
+    <string name="login_hint_username">Enter your username</string>
+    <string name="login_title_username">Username</string>
+    <string name="login_title_password">Password</string>
 </resources>
