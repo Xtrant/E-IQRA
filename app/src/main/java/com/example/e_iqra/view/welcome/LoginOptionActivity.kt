@@ -1,22 +1,24 @@
 package com.example.e_iqra.view.welcome
 
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.e_iqra.R
-import com.example.e_iqra.databinding.ActivityWelcomeBinding
+import com.example.e_iqra.databinding.ActivityLoginOptionBinding
 import com.example.e_iqra.view.main.MainActivity
 
-class WelcomeActivity : AppCompatActivity() {
+class LoginOptionActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityWelcomeBinding
+    private lateinit var binding: ActivityLoginOptionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWelcomeBinding.inflate(layoutInflater)
+        binding = ActivityLoginOptionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupView()
@@ -36,25 +38,11 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val isFirstTime = sharedPreferences.getBoolean("isFirstTime", true)
-
-        if (isFirstTime) {
-            setContentView(R.layout.activity_welcome)
-            val editor = sharedPreferences.edit()
-            editor.putBoolean("isFirstTime", false)
-            editor.apply()
-        } else {
-            val intent = Intent(this, LoginOptionActivity::class.java)
-            startActivity(intent)
-            finish()
+        binding.registerLogin.setOnClickListener {
         }
-
-        binding.button.setOnClickListener {
+        binding.buttonLogin.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }
 }
-
-
