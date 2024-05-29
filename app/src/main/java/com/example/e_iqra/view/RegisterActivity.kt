@@ -47,12 +47,12 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun isEmailValid() {
-        val etEmail = binding.etEmail.toString()
-        if (!Patterns.EMAIL_ADDRESS.matcher(etEmail).matches()) {
+        val valid = binding.etEmail.text?.let { Patterns.EMAIL_ADDRESS.matcher(it).matches() }
+        if (!valid!!) {
             binding.etEmail.setError("Invalid Input Email", null)
         }
         else
-            binding.etEmail.error = null
+            binding.etEmail.setError(null, null)
     }
 
     private fun playAnimation() {
@@ -68,9 +68,10 @@ class RegisterActivity : AppCompatActivity() {
         val editTextName = ObjectAnimator.ofFloat(binding.etName, View.ALPHA, 1f).setDuration(100)
         val titlePass = ObjectAnimator.ofFloat(binding.tvTitlePassword, View.ALPHA, 1f).setDuration(100)
         val editTextPass = ObjectAnimator.ofFloat(binding.etPass, View.ALPHA, 1f).setDuration(100)
+        val customButton = ObjectAnimator.ofFloat(binding.customBtn, View.ALPHA, 1f).setDuration(100)
 
         AnimatorSet().apply {
-            playSequentially(titleEmail, editTextEmail, titleName, editTextName, titlePass, editTextPass)
+            playSequentially(titleEmail, editTextEmail, titleName, editTextName, titlePass, editTextPass, customButton)
             start()
         }
     }
