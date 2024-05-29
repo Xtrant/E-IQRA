@@ -1,4 +1,4 @@
-package com.example.e_iqra
+package com.example.e_iqra.custom
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,8 +7,9 @@ import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import com.example.e_iqra.R
 
-class CustomButton : AppCompatButton {
+class CustomButtonLogin : AppCompatButton {
     constructor(context : Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
@@ -28,6 +29,6 @@ class CustomButton : AppCompatButton {
         setTextColor(txtColor)
         textSize = 12f
         gravity = Gravity.CENTER
-        text = if (isEnabled) "Login" else "Fill First"
+        text = if (isEnabled) "Login" else "Fill Competely First"
     }
 }
