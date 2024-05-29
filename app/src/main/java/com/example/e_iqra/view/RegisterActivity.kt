@@ -2,7 +2,11 @@ package com.example.e_iqra.view
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Patterns
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +28,31 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
         playAnimation()
+        setMyButtonEnable()
+
+        binding.etName.addTextChangedListener(MyTextWatcher())
+        binding.etEmail.addTextChangedListener(MyTextWatcher())
+        binding.etPass.addTextChangedListener(MyTextWatcher())
+
+        binding.customBtn.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+    }
+
+    private fun setMyButtonEnable() {
+        val etEmail = binding.etEmail.text
+        val etName = binding.etName.text
+        val etPassword = binding.etPass.text
+        binding.customBtn.isEnabled = etEmail != null && etEmail.toString().isNotEmpty() && etName != null && etName.toString().isNotEmpty() && etPassword != null && etPassword.toString().isNotEmpty() && etPassword.toString().length >= 8 && Patterns.EMAIL_ADDRESS.matcher(etEmail).matches()
+    }
+
+    private fun isEmailValid() {
+        val etEmail = binding.etEmail.toString()
+        if (!Patterns.EMAIL_ADDRESS.matcher(etEmail).matches()) {
+            binding.etEmail.setError("Invalid Input Email", null)
+        }
+        else
+            binding.etEmail.error = null
     }
 
     private fun playAnimation() {
@@ -43,6 +72,17 @@ class RegisterActivity : AppCompatActivity() {
         AnimatorSet().apply {
             playSequentially(titleEmail, editTextEmail, titleName, editTextName, titlePass, editTextPass)
             start()
+        }
+    }
+    inner class MyTextWatcher : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            setMyButtonEnable()
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            isEmailValid()
         }
     }
 }

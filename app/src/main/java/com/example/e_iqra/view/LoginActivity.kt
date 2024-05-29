@@ -3,6 +3,9 @@ package com.example.e_iqra.view
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Patterns
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.e_iqra.R
 import com.example.e_iqra.databinding.ActivityLoginBinding
+import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding : ActivityLoginBinding
@@ -24,6 +28,22 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
         playAnimation()
+        setMyButtonEnable()
+    }
+
+    private fun setMyButtonEnable() {
+        val etEmail = binding.etEmail.text
+        val etPassword = binding.etPass.text
+        binding.customBtn.isEnabled = etEmail != null && etEmail.toString().isNotEmpty() && etPassword != null && etPassword.toString().isNotEmpty() && etPassword.toString().length >= 8 && Patterns.EMAIL_ADDRESS.matcher(etEmail).matches()
+    }
+
+    private fun isEmailValid() {
+        val etEmail = binding.etEmail.toString()
+        if (!Patterns.EMAIL_ADDRESS.matcher(etEmail).matches()) {
+            binding.etEmail.setError("Invalid Input Email", null)
+        }
+        else
+            binding.etEmail.error = null
     }
 
     private fun playAnimation() {
@@ -41,6 +61,18 @@ class LoginActivity : AppCompatActivity() {
         AnimatorSet().apply {
             playSequentially(titleEmail, editTextEmail, titlePass, editTextPass)
             start()
+        }
+    }
+
+    inner class MyTextWatcher : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            setMyButtonEnable()
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+
         }
     }
 }
