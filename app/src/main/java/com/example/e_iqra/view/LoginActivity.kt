@@ -2,6 +2,7 @@ package com.example.e_iqra.view
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -29,6 +30,13 @@ class LoginActivity : AppCompatActivity() {
         }
         playAnimation()
         setMyButtonEnable()
+
+        binding.etEmail.addTextChangedListener(MyTextWatcher())
+        binding.etPass.addTextChangedListener(MyTextWatcher())
+
+        binding.customBtn.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
     }
 
     private fun setMyButtonEnable() {
@@ -72,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         override fun afterTextChanged(s: Editable?) {
-
+            isEmailValid()
         }
     }
 }
