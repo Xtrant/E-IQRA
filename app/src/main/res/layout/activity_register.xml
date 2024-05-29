@@ -126,6 +126,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="8dp"
+                    android:inputType="textPassword"
                     android:hint="@string/hint_password"
                     android:minHeight="48dp"
                     android:alpha="0"
@@ -136,7 +137,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_title_password"/>
 
 
-                <com.example.e_iqra.custom.CustomButtonLogin
+                <com.example.e_iqra.custom.CustomButtonRegister
                     android:id="@+id/custom_btn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

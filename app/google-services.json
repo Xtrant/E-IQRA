@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "840530836500",
+    "project_id": "e---iqra",
+    "storage_bucket": "e---iqra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840530836500:android:0b152e3426716cf7a63b01",
+        "android_client_info": {
+          "package_name": "com.example.e_iqra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWGW9ceIq8bGZyRJiXVdJpYy7-RvbNBiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
