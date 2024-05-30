@@ -1,7 +1,11 @@
 package com.example.e_iqra.view.main
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
 import android.view.ViewGroup
+import android.view.WindowInsets
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -12,6 +16,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.e_iqra.R
 import com.example.e_iqra.databinding.ActivityMainBinding
+import com.example.e_iqra.view.customview.CanvasView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

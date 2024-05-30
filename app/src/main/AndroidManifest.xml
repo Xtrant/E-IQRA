@@ -13,10 +13,11 @@
         android:theme="@style/Theme.EIQRA"
         tools:targetApi="31">
         <activity
-            android:name=".view.welcome.LoginOptionActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.main.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".view.welcome.LoginOptionActivity"
             android:exported="false" />
         <activity
             android:name=".view.welcome.WelcomeActivity"
