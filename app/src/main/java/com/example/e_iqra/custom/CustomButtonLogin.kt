@@ -29,6 +29,6 @@ class CustomButtonLogin : AppCompatButton {
         setTextColor(txtColor)
         textSize = 12f
         gravity = Gravity.CENTER
-        text = if (isEnabled) "Login" else "Fill Competely First"
+        text = if (isEnabled) "Login" else "Fill Completely First"
     }
 }

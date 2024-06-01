@@ -29,6 +29,6 @@ class CustomButtonRegister : AppCompatButton {
         setTextColor(txtColor)
         textSize = 12f
         gravity = Gravity.CENTER
-        text = if (isEnabled) "Register" else "Fill Competely First"
+        text = if (isEnabled) "Register" else "Fill Completely First"
     }
 }

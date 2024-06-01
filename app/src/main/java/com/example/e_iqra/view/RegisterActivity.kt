@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -60,11 +61,8 @@ class RegisterActivity : AppCompatActivity() {
         binding.etPass.addTextChangedListener(MyTextWatcher())
 
         binding.customBtn.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
-
-        binding.customBtn.setOnClickListener {
             register()
+            startActivity(Intent(this, LoginActivity:: class.java))
         }
 
         binding.googleBtn.setOnClickListener {
@@ -77,14 +75,17 @@ class RegisterActivity : AppCompatActivity() {
         val name = binding.etName.text.toString().trim()
         val password = binding.etPass.text.toString().trim()
 
-        val user = User(email = email, name = name, password = password)
+        val user = User(email = email, name = name)
 
+        userRepository.addUser(auth, email, password, user
+        ) {
+            if (it.isSuccessful) {
+                Toast.makeText(this, "Successfully Register", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, LoginActivity::class.java))
 
-        userRepository.addUser(user) { task ->
-            if (task.isSuccessful) {
-                Log.d(TAG, "User added successfully with ID: ${task.result?.id}")
             } else {
-                Log.e(TAG, "Error adding user", task.exception)
+                Log.d(TAG, "Register Error because: ${it.exception}")
+
             }
         }
     }

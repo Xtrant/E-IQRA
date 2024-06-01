@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,27 +22,30 @@ import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.lifecycleScope
 import com.example.e_iqra.MainActivity
 import com.example.e_iqra.R
+import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityLoginBinding
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityLoginBinding
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var userRepository: UserRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userRepository = UserRepository()
         auth = Firebase.auth
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -55,12 +59,29 @@ class LoginActivity : AppCompatActivity() {
         binding.etPass.addTextChangedListener(MyTextWatcher())
 
         binding.customBtn.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            login()
         }
 
         binding.googleBtn.setOnClickListener {
             signIn()
         }
+    }
+
+    private fun login() {
+        val email = binding.etEmail.text.toString().trim()
+        val password = binding.etPass.text.toString().trim()
+
+        userRepository.loginUser(auth, email, password) {
+            if (it.isSuccessful) {
+                Toast.makeText(this, "Nice, Your Login is Successfully", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity:: class.java))
+            }
+            else {
+                Toast.makeText(this, "Your Email or Password is Wrong, CHECK FIRST !!!", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
     }
 
     private fun signIn() {
@@ -94,7 +115,8 @@ class LoginActivity : AppCompatActivity() {
             is CustomCredential -> {
                 if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
                     try {
-                        val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
+                        val googleIdTokenCredential =
+                            GoogleIdTokenCredential.createFrom(credential.data)
                         firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
@@ -115,15 +137,18 @@ class LoginActivity : AppCompatActivity() {
     private fun setMyButtonEnable() {
         val etEmail = binding.etEmail.text
         val etPassword = binding.etPass.text
-        binding.customBtn.isEnabled = etEmail != null && etEmail.toString().isNotEmpty() && etPassword != null && etPassword.toString().isNotEmpty() && etPassword.toString().length >= 8 && Patterns.EMAIL_ADDRESS.matcher(etEmail).matches()
+        binding.customBtn.isEnabled = etEmail != null && etEmail.toString()
+            .isNotEmpty() && etPassword != null && etPassword.toString()
+            .isNotEmpty() && etPassword.toString().length >= 8 && Patterns.EMAIL_ADDRESS.matcher(
+            etEmail
+        ).matches()
     }
 
     private fun isEmailValid() {
         val valid = binding.etEmail.text?.let { Patterns.EMAIL_ADDRESS.matcher(it).matches() }
         if (!valid!!) {
             binding.etEmail.setError("Invalid Input Email", null)
-        }
-        else
+        } else
             binding.etEmail.setError(null, null)
     }
 
@@ -134,11 +159,14 @@ class LoginActivity : AppCompatActivity() {
             repeatMode = ObjectAnimator.REVERSE
         }.start()
 
-        val titleEmail = ObjectAnimator.ofFloat(binding.tvTitleEmail, View.ALPHA, 1f).setDuration(100)
+        val titleEmail =
+            ObjectAnimator.ofFloat(binding.tvTitleEmail, View.ALPHA, 1f).setDuration(100)
         val editTextEmail = ObjectAnimator.ofFloat(binding.etEmail, View.ALPHA, 1f).setDuration(100)
-        val titlePass = ObjectAnimator.ofFloat(binding.tvTitlePassword, View.ALPHA, 1f).setDuration(100)
+        val titlePass =
+            ObjectAnimator.ofFloat(binding.tvTitlePassword, View.ALPHA, 1f).setDuration(100)
         val editTextPass = ObjectAnimator.ofFloat(binding.etPass, View.ALPHA, 1f).setDuration(100)
-        val customButton = ObjectAnimator.ofFloat(binding.customBtn, View.ALPHA, 1f).setDuration(100)
+        val customButton =
+            ObjectAnimator.ofFloat(binding.customBtn, View.ALPHA, 1f).setDuration(100)
 
         AnimatorSet().apply {
             playSequentially(titleEmail, editTextEmail, titlePass, editTextPass, customButton)
