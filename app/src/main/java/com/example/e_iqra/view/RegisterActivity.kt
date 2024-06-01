@@ -21,7 +21,10 @@ import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.lifecycleScope
 import com.example.e_iqra.MainActivity
 import com.example.e_iqra.R
+import com.example.e_iqra.data.user.User
+import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityRegisterBinding
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -36,12 +39,14 @@ import kotlinx.coroutines.launch
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRegisterBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var userRepository: UserRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         auth = Firebase.auth
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userRepository = UserRepository()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -58,12 +63,33 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
+        binding.customBtn.setOnClickListener {
+            register()
+        }
+
         binding.googleBtn.setOnClickListener {
-            signIn()
+            signInGoogle()
         }
     }
 
-    private fun signIn() {
+    private fun register() {
+        val email = binding.etEmail.text.toString().trim()
+        val name = binding.etName.text.toString().trim()
+        val password = binding.etPass.text.toString().trim()
+
+        val user = User(email = email, name = name, password = password)
+
+
+        userRepository.addUser(user) { task ->
+            if (task.isSuccessful) {
+                Log.d(TAG, "User added successfully with ID: ${task.result?.id}")
+            } else {
+                Log.e(TAG, "Error adding user", task.exception)
+            }
+        }
+    }
+
+    private fun signInGoogle() {
         val credentialManager = CredentialManager.create(this)
 
         val googleIdOption = GetGoogleIdOption.Builder()
