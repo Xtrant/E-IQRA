@@ -19,7 +19,7 @@ class UserRepository {
         password: String,
         user: User,
         onCompleteListener: OnCompleteListener<Void>
-    ) { //TODO create listener for success and failed
+    ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 val userUid = it.user?.uid
@@ -42,20 +42,6 @@ class UserRepository {
     ) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(onCompleteListener)
-//            .addOnSuccessListener {
-//                auth.currentUser?.getIdToken(true)?.addOnCompleteListener {
-//                    if (it.isSuccessful) {
-//                        val token = it.result.token
-//                        Log.d(LoginActivity.TAG, "login: berhasil jancoek: $token")
-//                        eyJhbGciOiJSUzI1NiIsImtpZCI6IjVkNjE3N2E5Mjg2ZDI1Njg0NTI2OWEzMTM2ZDNmNjY0MjZhNGQ2NDIiLCJ0eXAiOiJKV1QifQ
-//                    } else {
-//                        Log.d(LoginActivity.TAG, "loginFailure: ")
-//                    }
-//                }
-//            }
-//            .addOnFailureListener {
-//                Log.d(LoginActivity.TAG, "loginFailure: ${it.message} ")
-//            }
     }
 
     fun readDataFirestore(
