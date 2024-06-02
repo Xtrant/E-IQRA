@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">E - IQRA</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="title_email">Email</string>
+    <string name="title_password">Password</string>
+    <string name="title_name">Name</string>
+    <string name="hint_name">Enter your name</string>
+    <string name="your_web_client_id">924005665443-55nql9o8d231dgom3jvkr3ra5kg6odo2.apps.googleusercontent.com</string>
+    <string name="title_greeting">Hello %1$s</string>
+    <string name="button_logout_name">Logout</string>
+    <string name="app_logo_contentDescription">logo app</string>
+    <string name="instruction_link">Register Here</string>
+    <string name="instruction_login">Don\'t have an account yet ?</string>
+    <string name="login_btn_title">login</string>
+    <string name="instruction_register">Already have an account ?</string>
+    <string name="instruction_link_register">Login Here</string>
 </resources>
