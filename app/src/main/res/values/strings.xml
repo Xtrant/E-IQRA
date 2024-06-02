@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">E - IQRA</string>
+    <string name="title_menu_1">Membantu dalam mempelajari huruf hijaiyah</string>
+    <string name="regist_now">Daftar Sekarang</string>
+    <string name="signup">Signup</string>
+    <string name="login">Login</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_scan">Scan</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
     <string name="hint_password">Enter your password</string>
     <string name="hint_email">Enter your email</string>
     <string name="title_email">Email</string>
