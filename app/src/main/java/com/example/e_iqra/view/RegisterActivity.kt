@@ -62,6 +62,9 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.customBtn.setOnClickListener {
             register()
+        }
+
+        binding.tvClickable.setOnClickListener {
             startActivity(Intent(this, LoginActivity:: class.java))
         }
 

@@ -1,10 +1,12 @@
 package com.example.e_iqra.data.user
 
+import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -16,12 +18,20 @@ class UserRepository {
         email: String,
         password: String,
         user: User,
-        onCompleteListener: OnCompleteListener<DocumentReference>
-    ) {
+        onCompleteListener: OnCompleteListener<Void>
+    ) { //TODO create listener for success and failed
         auth.createUserWithEmailAndPassword(email, password)
-        db.collection("users")
-            .add(user)
-            .addOnCompleteListener(onCompleteListener)
+            .addOnSuccessListener {
+                val userUid = it.user?.uid
+                if (userUid != null) {
+                    db.collection("users").document(userUid)
+                        .set(user)
+                        .addOnCompleteListener(onCompleteListener)
+                }
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "addUser: ${it.message}")
+            }
     }
 
     fun loginUser(
@@ -46,5 +56,19 @@ class UserRepository {
 //            .addOnFailureListener {
 //                Log.d(LoginActivity.TAG, "loginFailure: ${it.message} ")
 //            }
+    }
+
+    fun readDataFirestore(
+        currentUserId: String,
+        onCompleteListener: OnCompleteListener<DocumentSnapshot>
+
+    ) {
+        db.collection("users").document(currentUserId)
+            .get()
+            .addOnCompleteListener(onCompleteListener)
+    }
+
+    companion object {
+        private val TAG = "UserRepository"
     }
 }

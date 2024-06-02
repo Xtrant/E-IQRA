@@ -65,6 +65,10 @@ class LoginActivity : AppCompatActivity() {
         binding.googleBtn.setOnClickListener {
             signIn()
         }
+
+        binding.tvClickable.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity:: class.java))
+        }
     }
 
     private fun login() {
