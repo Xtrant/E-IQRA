@@ -17,10 +17,10 @@ firebaseAuthKtx = "23.0.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.0.0"
 firebaseFirestore = "25.0.0"
-converterGson = "2.9.0"
-lifecycleRuntimeKtx = "2.6.1"
-loggingInterceptor = "4.11.0"
-retrofit = "2.9.0"
+converterGson = "2.11.0"
+lifecycleRuntimeKtx = "2.8.1"
+loggingInterceptor = "4.12.0"
+retrofit = "2.11.0"
 
 
 [libraries]
