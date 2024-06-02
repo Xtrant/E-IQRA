@@ -76,6 +76,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun uploadImage() {
+
+    }
+
         companion object {
             private const val TAG = "MainActivity"
         }

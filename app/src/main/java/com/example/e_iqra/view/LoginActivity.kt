@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.tvClickable.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity:: class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
@@ -78,14 +78,15 @@ class LoginActivity : AppCompatActivity() {
         userRepository.loginUser(auth, email, password) {
             if (it.isSuccessful) {
                 Toast.makeText(this, "Nice, Your Login is Successfully", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity:: class.java))
-            }
-            else {
-                Toast.makeText(this, "Your Email or Password is Wrong, CHECK FIRST !!!", Toast.LENGTH_SHORT).show()
-
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                Toast.makeText(
+                    this,
+                    "Your Email or Password is Wrong, CHECK FIRST !!!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
-
     }
 
     private fun signIn() {
@@ -164,16 +165,29 @@ class LoginActivity : AppCompatActivity() {
         }.start()
 
         val titleEmail =
-            ObjectAnimator.ofFloat(binding.tvTitleEmail, View.ALPHA, 1f).setDuration(100)
-        val editTextEmail = ObjectAnimator.ofFloat(binding.etEmail, View.ALPHA, 1f).setDuration(100)
+            ObjectAnimator.ofFloat(binding.tvTitleEmail, View.ALPHA, 1f).setDuration(200)
+        val editTextEmail =
+            ObjectAnimator.ofFloat(binding.etEmail, View.ALPHA, 1f).setDuration(200)
         val titlePass =
-            ObjectAnimator.ofFloat(binding.tvTitlePassword, View.ALPHA, 1f).setDuration(100)
-        val editTextPass = ObjectAnimator.ofFloat(binding.etPass, View.ALPHA, 1f).setDuration(100)
+            ObjectAnimator.ofFloat(binding.tvTitlePassword, View.ALPHA, 1f).setDuration(200)
+        val editTextPass =
+            ObjectAnimator.ofFloat(binding.etPass, View.ALPHA, 1f).setDuration(200)
         val customButton =
-            ObjectAnimator.ofFloat(binding.customBtn, View.ALPHA, 1f).setDuration(100)
+            ObjectAnimator.ofFloat(binding.customBtn, View.ALPHA, 1f).setDuration(200)
+        val sigInGoogleButton =
+            ObjectAnimator.ofFloat(binding.googleBtn, View.ALPHA, 1f).setDuration(200)
+        val instruction =
+            ObjectAnimator.ofFloat(binding.tvInstruction, View.ALPHA, 1f).setDuration(200)
+        val instructionLink =
+            ObjectAnimator.ofFloat(binding.tvClickable, View.ALPHA, 1f).setDuration(200)
+
+        val instructionTogether =  AnimatorSet().apply {
+            playTogether(instruction, instructionLink)
+        }
+
 
         AnimatorSet().apply {
-            playSequentially(titleEmail, editTextEmail, titlePass, editTextPass, customButton)
+            playSequentially(titleEmail, editTextEmail, titlePass, editTextPass, customButton, sigInGoogleButton, instructionTogether)
             start()
         }
     }

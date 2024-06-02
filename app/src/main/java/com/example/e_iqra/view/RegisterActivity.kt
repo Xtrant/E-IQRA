@@ -25,7 +25,6 @@ import com.example.e_iqra.R
 import com.example.e_iqra.data.user.User
 import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityRegisterBinding
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -88,6 +87,7 @@ class RegisterActivity : AppCompatActivity() {
 
             } else {
                 Log.d(TAG, "Register Error because: ${it.exception}")
+                Toast.makeText(this, "Register Error", Toast.LENGTH_SHORT).show()
 
             }
         }
@@ -165,16 +165,26 @@ class RegisterActivity : AppCompatActivity() {
             repeatMode = ObjectAnimator.REVERSE
         }.start()
 
-        val titleEmail = ObjectAnimator.ofFloat(binding.tvTitleEmail, View.ALPHA, 1f).setDuration(100)
-        val editTextEmail = ObjectAnimator.ofFloat(binding.etEmail, View.ALPHA, 1f).setDuration(100)
-        val titleName = ObjectAnimator.ofFloat(binding.tvTitleName, View.ALPHA, 1f).setDuration(100)
-        val editTextName = ObjectAnimator.ofFloat(binding.etName, View.ALPHA, 1f).setDuration(100)
-        val titlePass = ObjectAnimator.ofFloat(binding.tvTitlePassword, View.ALPHA, 1f).setDuration(100)
-        val editTextPass = ObjectAnimator.ofFloat(binding.etPass, View.ALPHA, 1f).setDuration(100)
-        val customButton = ObjectAnimator.ofFloat(binding.customBtn, View.ALPHA, 1f).setDuration(100)
+        val titleEmail = ObjectAnimator.ofFloat(binding.tvTitleEmail, View.ALPHA, 1f).setDuration(200)
+        val editTextEmail = ObjectAnimator.ofFloat(binding.etEmail, View.ALPHA, 1f).setDuration(200)
+        val titleName = ObjectAnimator.ofFloat(binding.tvTitleName, View.ALPHA, 1f).setDuration(200)
+        val editTextName = ObjectAnimator.ofFloat(binding.etName, View.ALPHA, 1f).setDuration(200)
+        val titlePass = ObjectAnimator.ofFloat(binding.tvTitlePassword, View.ALPHA, 1f).setDuration(200)
+        val editTextPass = ObjectAnimator.ofFloat(binding.etPass, View.ALPHA, 1f).setDuration(200)
+        val customButton = ObjectAnimator.ofFloat(binding.customBtn, View.ALPHA, 1f).setDuration(200)
+        val sigInGoogleButton =
+            ObjectAnimator.ofFloat(binding.googleBtn, View.ALPHA, 1f).setDuration(200)
+        val instruction =
+            ObjectAnimator.ofFloat(binding.tvInstruction, View.ALPHA, 1f).setDuration(200)
+        val instructionLink =
+            ObjectAnimator.ofFloat(binding.tvClickable, View.ALPHA, 1f).setDuration(200)
+
+        val instructionTogether =  AnimatorSet().apply {
+            playTogether(instruction, instructionLink)
+        }
 
         AnimatorSet().apply {
-            playSequentially(titleEmail, editTextEmail, titleName, editTextName, titlePass, editTextPass, customButton)
+            playSequentially(titleEmail, editTextEmail, titleName, editTextName, titlePass, editTextPass, customButton, sigInGoogleButton, instructionTogether)
             start()
         }
     }

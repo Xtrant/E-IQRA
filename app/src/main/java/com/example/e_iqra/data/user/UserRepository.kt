@@ -1,12 +1,14 @@
 package com.example.e_iqra.data.user
 
 import android.util.Log
+import com.example.e_iqra.data.api.ApiConfig
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import okhttp3.MultipartBody
 
 class UserRepository {
     private val db = Firebase.firestore
@@ -52,7 +54,11 @@ class UserRepository {
             .addOnCompleteListener(onCompleteListener)
     }
 
+    suspend fun uploadImage(token: String, file: MultipartBody.Part ) {
+        val apiConfig = ApiConfig().getApiService(token).uploadImage(file)
+    }
+
     companion object {
-        private val TAG = "UserRepository"
+        private const val TAG = "UserRepository"
     }
 }
