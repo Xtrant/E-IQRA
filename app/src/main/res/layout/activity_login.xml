@@ -144,7 +144,9 @@
                 app:layout_constraintBottom_toTopOf="@id/tv_instruction"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/custom_btn" />
+                app:layout_constraintTop_toBottomOf="@id/custom_btn"
+                android:alpha="0"
+                tools:alpha="100"/>
 
             <TextView
                 android:id="@+id/tv_instruction"
@@ -154,7 +156,9 @@
                 android:layout_marginBottom="8dp"
                 android:text="@string/instruction_login"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                android:alpha="0"
+                tools:alpha="100"/>
 
             <TextView
                 android:id="@+id/tv_clickable"
@@ -166,7 +170,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.03"
-                app:layout_constraintStart_toEndOf="@+id/tv_instruction" />
+                app:layout_constraintStart_toEndOf="@+id/tv_instruction"
+                android:alpha="0"
+                tools:alpha="100"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

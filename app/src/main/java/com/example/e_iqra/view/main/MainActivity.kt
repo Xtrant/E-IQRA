@@ -39,19 +39,6 @@ class MainActivity : AppCompatActivity() {
         // Remove any existing logo
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        // Create an ImageView for the logo
-        val logo = ImageView(this).apply {
-            layoutParams = ViewGroup.LayoutParams(
-                resources.getDimensionPixelSize(R.dimen.logo_width),
-                resources.getDimensionPixelSize(R.dimen.logo_height)
-            )
-            setImageDrawable(ContextCompat.getDrawable(context, R.drawable.app_logo))
-            scaleType = ImageView.ScaleType.CENTER_INSIDE
-        }
-
-        // Add the ImageView to the Toolbar
-        toolbar.addView(logo)
-
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(

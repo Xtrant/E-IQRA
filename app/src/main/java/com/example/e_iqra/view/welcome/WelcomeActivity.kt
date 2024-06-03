@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.e_iqra.R
 import com.example.e_iqra.databinding.ActivityWelcomeBinding
+import com.example.e_iqra.view.RegisterActivity
 import com.example.e_iqra.view.main.MainActivity
 
 class WelcomeActivity : AppCompatActivity() {
@@ -51,7 +52,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         binding.button.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
     }
