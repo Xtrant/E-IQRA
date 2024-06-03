@@ -20,11 +20,11 @@ import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.lifecycleScope
-import com.example.e_iqra.MainActivity
 import com.example.e_iqra.R
 import com.example.e_iqra.data.user.User
 import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityRegisterBinding
+import com.example.e_iqra.view.main.MainActivity
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
