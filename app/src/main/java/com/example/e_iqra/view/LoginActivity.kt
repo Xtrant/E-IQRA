@@ -42,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         userRepository = UserRepository()
@@ -54,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
         }
         playAnimation()
         setMyButtonEnable()
+
 
         binding.etEmail.addTextChangedListener(MyTextWatcher())
         binding.etPass.addTextChangedListener(MyTextWatcher())
@@ -78,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
         userRepository.loginUser(auth, email, password) {
             if (it.isSuccessful) {
                 Toast.makeText(this, "Nice, Your Login is Successfully", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
             } else {
                 Toast.makeText(
                     this,

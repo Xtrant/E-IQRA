@@ -25,4 +25,6 @@
     <string name="login_btn_title">login</string>
     <string name="instruction_register">Already have an account ?</string>
     <string name="instruction_link_register">Login Here</string>
+    <string name="analyze_title">Analyze</string>
+    <string name="content_description_galeryAccess">btn_galery_access</string>
 </resources>
