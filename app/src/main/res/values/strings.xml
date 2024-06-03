@@ -25,4 +25,11 @@
     <string name="login_btn_title">login</string>
     <string name="instruction_register">Already have an account ?</string>
     <string name="instruction_link_register">Login Here</string>
+    <string name="judul_artikel">Judul</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_doa">Text Doa</string>
+    <string name="text_latin">Text Latin</string>
+    <string name="arti_doa">Arti</string>
+    <string name="translate">Terjemahan</string>
 </resources>
