@@ -104,7 +104,7 @@ class TryApiPredict : AppCompatActivity() {
         //send request to api
         lifecycleScope.launch {
             try {
-                val client = ApiConfig.getApiService(token).uploadImage(multipartBody)
+                val client = userRepository.uploadImage(token, multipartBody)
                 resultPredict = client.result
                 confidencePredict = client.confidence
                 val intent = Intent(this@TryApiPredict, ResultActivity::class.java)
