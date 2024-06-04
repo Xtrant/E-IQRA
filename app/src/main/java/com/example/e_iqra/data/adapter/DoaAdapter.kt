@@ -1,50 +1,54 @@
 package com.example.e_iqra.data.adapter
 
+import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_iqra.R
 import com.example.e_iqra.data.api.DoaResponseItem
+import com.example.e_iqra.databinding.ItemArticleBinding
+import com.example.e_iqra.view.main.ui.home.detail.DoaDetailFragment
 
-// DoaAdapter.kt
-class DoaAdapter(
-    private var doaList: MutableList<DoaResponseItem>,
-    private val onItemClick: (DoaResponseItem) -> Unit
-) : RecyclerView.Adapter<DoaAdapter.DoaViewHolder>() {
+class DoaAdapter(private val context: Context) : ListAdapter<DoaResponseItem, DoaAdapter.DoaViewHolder>(DIFF_CALLBACK) {
 
-    inner class DoaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textViewDoa: TextView = itemView.findViewById(R.id.textViewDoa)
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DoaResponseItem>() {
+            override fun areItemsTheSame(oldItem: DoaResponseItem, newItem: DoaResponseItem): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-        init {
-            itemView.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    onItemClick(doaList[position])
-                }
+            override fun areContentsTheSame(oldItem: DoaResponseItem, newItem: DoaResponseItem): Boolean {
+                return oldItem == newItem
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoaViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_article, parent, false)
-        return DoaViewHolder(view)
+        val binding = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DoaViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: DoaViewHolder, position: Int) {
-        val currentItem = doaList[position]
-        holder.textViewDoa.text = currentItem.doa
+        val doaItem = getItem(position)
+        holder.bind(doaItem)
     }
 
-    override fun getItemCount(): Int {
-        return doaList.size
-    }
-
-    fun setDoaList(newDoaList: List<DoaResponseItem>) {
-        doaList.clear()
-        doaList.addAll(newDoaList)
-        notifyDataSetChanged()
+    inner class DoaViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(doaItem: DoaResponseItem) {
+            binding.textViewDoa.text = doaItem.doa
+            binding.root.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putString(DoaDetailFragment.EXTRA_DOA, doaItem.doa)
+                    putString(DoaDetailFragment.EXTRA_AYAT, doaItem.ayat)
+                    putString(DoaDetailFragment.EXTRA_LATIN, doaItem.latin)
+                    putString(DoaDetailFragment.EXTRA_ARTINYA, doaItem.artinya)
+                }
+                it.findNavController().navigate(R.id.action_navigation_home_to_doaDetailFragment, bundle)
+            }
+        }
     }
 }
-

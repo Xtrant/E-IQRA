@@ -19,7 +19,7 @@ class HomeViewModel : ViewModel() {
         fetchDoaList()
     }
 
-    private fun fetchDoaList() {
+    fun fetchDoaList() {
         val call = ApiConfig.getDoaApiService().getDoaList()
         call.enqueue(object : Callback<List<DoaResponseItem>> {
             override fun onResponse(call: Call<List<DoaResponseItem>>, response: Response<List<DoaResponseItem>>) {
