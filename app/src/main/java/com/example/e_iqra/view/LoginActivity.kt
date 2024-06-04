@@ -24,6 +24,7 @@ import com.example.e_iqra.R
 import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityLoginBinding
 import com.example.e_iqra.view.main.MainActivity
+import com.example.e_iqra.view.tryapipredict.TryApiPredict
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -226,7 +227,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, TryApiPredict::class.java))
             finish()
         }
     }

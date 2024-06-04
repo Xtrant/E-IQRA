@@ -6,18 +6,27 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.credentials.ClearCredentialStateRequest
+import androidx.credentials.CredentialManager
+import androidx.lifecycle.lifecycleScope
 import com.example.e_iqra.databinding.ActivityLoginOptionBinding
 import com.example.e_iqra.view.LoginActivity
 import com.example.e_iqra.view.RegisterActivity
 import com.example.e_iqra.view.main.MainActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class LoginOptionActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
 
     private lateinit var binding: ActivityLoginOptionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginOptionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = Firebase.auth
 
         setupView()
         setupAction()
@@ -43,6 +52,21 @@ class LoginOptionActivity : AppCompatActivity() {
         binding.buttonLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.logout.setOnClickListener {
+            logout()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+    }
+    private fun logout() {
+        lifecycleScope.launch {
+            val credentialManager = CredentialManager.create(this@LoginOptionActivity)
+
+            auth.signOut()
+            credentialManager.clearCredentialState(ClearCredentialStateRequest())
+
         }
     }
 }

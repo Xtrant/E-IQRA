@@ -54,9 +54,10 @@ class UserRepository {
             .addOnCompleteListener(onCompleteListener)
     }
 
-    suspend fun uploadImage(token: String, file: MultipartBody.Part ) {
-        val apiConfig = ApiConfig().getApiService(token).uploadImage(file)
-    }
+//    suspend fun uploadImage(token: String, file: MultipartBody.Part) {
+//        ApiConfig().getApiService(token).uploadImage(file).resultPredict
+//    }
+
 
     companion object {
         private const val TAG = "UserRepository"
