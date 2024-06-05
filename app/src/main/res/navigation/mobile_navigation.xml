@@ -15,12 +15,19 @@
             app:destination="@id/doaDetailFragment" />
     </fragment>
 
-
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.e_iqra.view.main.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_navigation_dashboard_to_canvasFragment"
+            app:destination="@id/canvasFragment" />
+
+        <action
+            android:id="@+id/action_navigation_dashboard_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -33,4 +40,16 @@
         android:name="com.example.e_iqra.view.main.ui.home.detail.DoaDetailFragment"
         android:label="Doa Detail"
         tools:layout="@layout/fragment_doa_detail" />
+
+    <fragment
+        android:id="@+id/canvasFragment"
+        android:name="com.example.e_iqra.view.main.ui.dashboard.canvas.CanvasFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_canvas" />
+
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.example.e_iqra.view.main.ui.dashboard.gallery.GalleryFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_gallery" />
 </navigation>

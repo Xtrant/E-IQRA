@@ -32,4 +32,6 @@
     <string name="text_latin">Text Latin</string>
     <string name="arti_doa">Arti</string>
     <string name="translate">Terjemahan</string>
+    <string name="btn_gallery">Gallery</string>
+    <string name="btn_canvas">Canvas</string>
 </resources>
