@@ -1,5 +1,6 @@
 package com.example.e_iqra.view.main.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.e_iqra.R
 import com.example.e_iqra.databinding.FragmentDashboardBinding
+import com.example.e_iqra.view.main.ui.dashboard.canvas.CanvasActivity
 
 class DashboardFragment : Fragment() {
 
@@ -32,7 +34,8 @@ class DashboardFragment : Fragment() {
 
     private fun setupAction() {
         binding.canvasButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_dashboard_to_canvasFragment)
+            val intent = Intent(requireContext(), CanvasActivity::class.java)
+            startActivity(intent)
         }
         binding.galleryButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_dashboard_to_galleryFragment)

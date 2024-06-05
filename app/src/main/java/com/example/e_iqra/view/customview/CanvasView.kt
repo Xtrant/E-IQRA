@@ -22,12 +22,10 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private lateinit var extraBitmap: Bitmap
 
     init {
-        // Inisialisasi tambahan jika diperlukan
         setupDrawing()
     }
 
     private fun setupDrawing() {
-        // Pengaturan tambahan untuk paint atau lainnya
         paint.color = drawColor
         paint.style = Paint.Style.STROKE
         paint.isAntiAlias = true
@@ -68,5 +66,21 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
         invalidate()
         return true
+    }
+
+    fun setBitmap(bitmap: Bitmap) {
+        extraBitmap = Bitmap.createBitmap(bitmap)
+        extraCanvas = Canvas(extraBitmap)
+        invalidate()
+    }
+
+    fun getBitmap(): Bitmap {
+        return extraBitmap
+    }
+
+    fun clearCanvas() {
+        path.reset()
+        extraCanvas.drawColor(backgroundColor)
+        invalidate()
     }
 }
