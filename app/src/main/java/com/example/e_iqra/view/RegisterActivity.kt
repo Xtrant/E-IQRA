@@ -79,16 +79,13 @@ class RegisterActivity : AppCompatActivity() {
 
         val user = User(email = email, name = name)
 
-        userRepository.addUser(auth, email, password, user
-        ) {
+        userRepository.addUser(
+            auth, email, password, user) {
             if (it.isSuccessful) {
-                Toast.makeText(this, "Successfully Register", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Successfully Create Account", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, LoginActivity::class.java))
-
             } else {
-                Log.d(TAG, "Register Error because: ${it.exception}")
-                Toast.makeText(this, "Register Error", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(this, "Error Create Account", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -216,7 +213,22 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
-            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            val uidGoogle = currentUser.uid
+            val name = currentUser.displayName
+            val email = currentUser.email
+
+            if (name != null && email != null) {
+                val user = User(email = email, name = name)
+                userRepository.addtoFirestoreGoogle(uidGoogle, user) {
+                    if (it.isSuccessful) {
+                        Log.d(TAG, "Google Account Success added to Firestore")
+                    } else {
+                        Log.d(TAG, "Google Account Failed added to Firestore")
+                    }
+                }
+            }
+
+            startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
             finish()
         }
     }

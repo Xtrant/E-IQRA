@@ -1,26 +1,24 @@
 package com.example.e_iqra.view.main
 
-import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
-import android.view.ViewGroup
-import android.view.WindowInsets
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.e_iqra.R
+import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityMainBinding
-import com.example.e_iqra.view.customview.CanvasView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var userRepository: UserRepository
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = Firebase.auth
 
         val navView: BottomNavigationView = binding.navView
 
@@ -48,5 +48,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    fun addFirebase() {
+        val firebaseUser = auth.currentUser
+        if (firebaseUser != null) {
+
+        }
     }
 }

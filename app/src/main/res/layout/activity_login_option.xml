@@ -11,27 +11,29 @@
     android:layout_height="match_parent"
     tools:context=".view.welcome.LoginOptionActivity">
 
+
     <ImageView
         android:id="@+id/imagePage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/app_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.189" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/registerLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="@string/signup"
-        android:layout_marginBottom="4dp"
         app:cornerRadius="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonLogin"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLogin"

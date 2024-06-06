@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.e_iqra.databinding.ActivityLoginOptionBinding
 import com.example.e_iqra.view.LoginActivity
 import com.example.e_iqra.view.RegisterActivity
-import com.example.e_iqra.view.main.MainActivity
 
 class LoginOptionActivity : AppCompatActivity() {
 
@@ -44,5 +43,12 @@ class LoginOptionActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+
+
     }
+
 }
+
+
+
+

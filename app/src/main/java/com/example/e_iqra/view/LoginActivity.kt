@@ -21,6 +21,7 @@ import androidx.credentials.GetCredentialResponse
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.lifecycleScope
 import com.example.e_iqra.R
+import com.example.e_iqra.data.user.User
 import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityLoginBinding
 import com.example.e_iqra.view.main.MainActivity
@@ -71,12 +72,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+//    override fun onStart() {
+//        super.onStart()
+//        val currentUser = auth.currentUser
+//        updateUI(currentUser)
+//    }
+
     private fun login() {
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPass.text.toString().trim()
 
         userRepository.loginUser(auth, email, password) {
             if (it.isSuccessful) {
+
                 Toast.makeText(this, "Nice, Your Login is Successfully", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
@@ -181,13 +189,21 @@ class LoginActivity : AppCompatActivity() {
         val instructionLink =
             ObjectAnimator.ofFloat(binding.tvClickable, View.ALPHA, 1f).setDuration(200)
 
-        val instructionTogether =  AnimatorSet().apply {
+        val instructionTogether = AnimatorSet().apply {
             playTogether(instruction, instructionLink)
         }
 
 
         AnimatorSet().apply {
-            playSequentially(titleEmail, editTextEmail, titlePass, editTextPass, customButton, sigInGoogleButton, instructionTogether)
+            playSequentially(
+                titleEmail,
+                editTextEmail,
+                titlePass,
+                editTextPass,
+                customButton,
+                sigInGoogleButton,
+                instructionTogether
+            )
             start()
         }
     }
@@ -202,12 +218,6 @@ class LoginActivity : AppCompatActivity() {
         override fun afterTextChanged(s: Editable?) {
             isEmailValid()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
@@ -227,6 +237,21 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
+            val uidGoogle = currentUser.uid
+            val name = currentUser.displayName
+            val email = currentUser.email
+
+            if (name != null && email != null) {
+                val user = User(email = email, name = name)
+                userRepository.addtoFirestoreGoogle(uidGoogle, user) {
+                    if (it.isSuccessful) {
+                        Log.d(TAG, "Google Account Success added to Firestore")
+                    } else {
+                        Log.d(TAG, "Google Account Failed added to Firestore")
+                    }
+                }
+            }
+
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
         }

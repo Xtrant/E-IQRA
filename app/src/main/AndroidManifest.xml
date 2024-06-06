@@ -15,6 +15,9 @@
         android:theme="@style/Theme.EIQRA"
         tools:targetApi="31">
         <activity
+            android:name=".view.tryprofile.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.tryprofile.TryProfileActivity"
             android:exported="false" />
         <activity

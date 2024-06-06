@@ -13,12 +13,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.e_iqra.databinding.FragmentNotificationsBinding
 import com.example.e_iqra.view.LoginActivity
+import com.example.e_iqra.view.tryprofile.TryProfileActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
-class NotificationsFragment : Fragment() {
+class   NotificationsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
     private lateinit var auth : FirebaseAuth
@@ -44,6 +45,10 @@ class NotificationsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnLogout.setOnClickListener {
             logout()
+        }
+
+        binding.toProfileBtn.setOnClickListener {
+            startActivity(Intent(context, TryProfileActivity::class.java))
         }
     }
 
