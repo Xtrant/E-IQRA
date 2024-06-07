@@ -35,4 +35,5 @@
     <string name="btn_gallery">Gallery</string>
     <string name="btn_canvas">Canvas</string>
     <string name="result_image">Hasil Canvas</string>
+    <string name="analyze">Analisis</string>
 </resources>

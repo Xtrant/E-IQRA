@@ -42,9 +42,7 @@ class CanvasActivity : AppCompatActivity() {
         updateFabIcon()
 
         fabToggleSize.setOnClickListener {
-            saveBitmapTemporarily()
             toggleCanvasSize()
-            restoreBitmapTemporarily()
         }
 
         fabDone.setOnClickListener {
@@ -126,27 +124,6 @@ class CanvasActivity : AppCompatActivity() {
             e.printStackTrace()
         }
         return imagePath
-    }
-
-    private fun saveBitmapTemporarily() {
-        val bitmap = binding.drawView.getBitmap()
-        val imagePath = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "temp_canvas_image.png")
-        try {
-            val outputStream = FileOutputStream(imagePath)
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-            outputStream.flush()
-            outputStream.close()
-            bitmapFilePath = imagePath.absolutePath
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun restoreBitmapTemporarily() {
-        bitmapFilePath?.let {
-            val bitmap = BitmapFactory.decodeFile(it)
-            binding.drawView.setBitmap(bitmap)
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
