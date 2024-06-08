@@ -40,8 +40,8 @@ class TryProfileActivity : AppCompatActivity() {
             val name = binding.name.text
             val email = binding.email.text
             val intent = Intent(this, EditProfileActivity::class.java)
-            intent.putExtra("EXTRA_NAME", name)
-            intent.putExtra("EXTRA_EMAIL", email)
+            intent.putExtra(EditProfileActivity.EXTRA_NAME, name)
+            intent.putExtra(EditProfileActivity.EXTRA_EMAIL, email)
             startActivity(intent)
         }
     }

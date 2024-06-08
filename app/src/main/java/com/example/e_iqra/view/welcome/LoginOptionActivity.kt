@@ -9,14 +9,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.e_iqra.databinding.ActivityLoginOptionBinding
 import com.example.e_iqra.view.LoginActivity
 import com.example.e_iqra.view.RegisterActivity
+import com.example.e_iqra.view.main.MainActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginOptionActivity : AppCompatActivity() {
-
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityLoginOptionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginOptionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = Firebase.auth
 
         setupView()
         setupAction()
@@ -44,9 +49,15 @@ class LoginOptionActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+    }
 }
 
 

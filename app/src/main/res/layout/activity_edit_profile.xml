@@ -14,7 +14,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
-        android:alpha="0"
+
         android:text="@string/title_email"
         android:textSize="21sp"
         android:textStyle="bold"
@@ -31,15 +31,14 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:textStyle="bold"
         android:text="@string/title_name"
         android:textSize="21sp"
-        android:alpha="0"
-        tools:alpha="100"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/et_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_email"/>
+        app:layout_constraintTop_toBottomOf="@id/et_email"
+        tools:alpha="100" />
 
     <com.example.e_iqra.custom.CustomEditText
         android:id="@+id/et_email"
@@ -48,18 +47,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
         android:background="@color/white"
         android:gravity="start|center_vertical"
         android:hint="@string/hint_email"
         android:minHeight="48dp"
-        android:alpha="0"
-        tools:alpha="100"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_title_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_title_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_email" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title_email"
+        tools:alpha="100" />
 
     <com.example.e_iqra.custom.CustomEditText
         android:id="@+id/et_name"
@@ -68,19 +66,19 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
         android:background="@color/white"
         android:gravity="start|center_vertical"
         android:hint="@string/hint_name"
         android:minHeight="48dp"
-        android:alpha="0"
-        tools:alpha="100"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title_name"
+        tools:alpha="100" />
 
     <Button
+        android:id="@+id/updt_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

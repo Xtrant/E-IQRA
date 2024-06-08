@@ -1,5 +1,6 @@
 package com.example.e_iqra.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -16,9 +17,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var auth: FirebaseAuth
-    private lateinit var userRepository: UserRepository
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        auth = Firebase.auth
 
         val navView: BottomNavigationView = binding.navView
 
@@ -48,12 +44,5 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    fun addFirebase() {
-        val firebaseUser = auth.currentUser
-        if (firebaseUser != null) {
-
-        }
     }
 }
