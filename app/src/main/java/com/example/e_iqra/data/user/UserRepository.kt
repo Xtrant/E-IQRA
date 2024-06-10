@@ -2,6 +2,7 @@ package com.example.e_iqra.data.user
 
 import android.util.Log
 import com.example.e_iqra.data.api.ApiConfig
+import com.example.e_iqra.data.api.FileUploadResponse
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -54,9 +55,14 @@ class UserRepository {
             .addOnCompleteListener(onCompleteListener)
     }
 
-    suspend fun uploadImage(token: String, file: MultipartBody.Part ) {
+    suspend fun uploadImage(token: String, file: MultipartBody.Part) : FileUploadResponse {
         val apiConfig = ApiConfig().getApiService(token).uploadImage(file)
+
+
+        return apiConfig
+
     }
+
 
     companion object {
         private const val TAG = "UserRepository"

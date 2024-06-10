@@ -36,4 +36,6 @@
     <string name="btn_canvas">Canvas</string>
     <string name="result_image">Hasil Canvas</string>
     <string name="analyze">Analisis</string>
+    <string name="analyze_title">Analyze</string>
+    <string name="content_description_galeryAccess">btn_galery_access</string>
 </resources>
