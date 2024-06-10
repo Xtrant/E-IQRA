@@ -21,7 +21,7 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private lateinit var extraCanvas: Canvas
     private lateinit var extraBitmap: Bitmap
 
-    private var storedBitmap: Bitmap? = null // Menyimpan gambar coretan
+    private var storedBitmap: Bitmap? = null
 
     init {
         setupDrawing()
@@ -67,7 +67,6 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             }
             MotionEvent.ACTION_UP -> {
                 path.reset()
-                // Simpan gambar coretan saat pengguna selesai menggambar
                 storedBitmap = Bitmap.createBitmap(extraBitmap)
             }
             else -> return false
@@ -90,7 +89,7 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     fun clearCanvas() {
         path.reset()
         extraCanvas.drawColor(backgroundColor)
-        storedBitmap = null // Hapus gambar yang disimpan saat membersihkan kanvas
+        storedBitmap = null
         invalidate()
     }
 }

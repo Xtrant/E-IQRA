@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.example.e_iqra.R
 import com.example.e_iqra.databinding.FragmentDashboardBinding
 import com.example.e_iqra.view.main.ui.dashboard.canvas.CanvasActivity
 
@@ -36,9 +34,6 @@ class DashboardFragment : Fragment() {
         binding.canvasButton.setOnClickListener {
             val intent = Intent(requireContext(), CanvasActivity::class.java)
             startActivity(intent)
-        }
-        binding.galleryButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_dashboard_to_galleryFragment)
         }
     }
 
