@@ -15,7 +15,7 @@
         android:theme="@style/Theme.EIQRA"
         tools:targetApi="31">
         <activity
-            android:name=".view.main.ui.dashboard.canvas.ResultActivity"
+            android:name=".view.main.ui.dashboard.canvas.AnalyzeActivity"
             android:exported="false" />
         <activity
             android:name=".view.main.ui.dashboard.canvas.CanvasActivity"

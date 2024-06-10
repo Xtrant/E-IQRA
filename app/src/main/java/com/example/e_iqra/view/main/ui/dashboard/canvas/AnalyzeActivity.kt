@@ -4,16 +4,16 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.example.e_iqra.databinding.ActivityResultBinding
+import com.example.e_iqra.databinding.ActivityAnalyzeBinding
 import java.io.File
 
-class ResultActivity : AppCompatActivity() {
+class AnalyzeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityResultBinding
+    private lateinit var binding: ActivityAnalyzeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityResultBinding.inflate(layoutInflater)
+        binding = ActivityAnalyzeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)

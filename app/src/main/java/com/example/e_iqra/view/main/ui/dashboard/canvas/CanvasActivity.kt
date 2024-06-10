@@ -108,7 +108,7 @@ class CanvasActivity : AppCompatActivity() {
         val imageFile = saveBitmapToFile(bitmap)
         bitmapFilePath = imageFile.absolutePath
 
-        val intent = Intent(this, ResultActivity::class.java)
+        val intent = Intent(this, AnalyzeActivity::class.java)
         intent.putExtra("image_path", bitmapFilePath)
         startActivity(intent)
     }
