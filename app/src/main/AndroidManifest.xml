@@ -21,6 +21,12 @@
             android:name=".view.tryprofile.TryProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".view.main.ui.dashboard.canvas.AnalyzeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.ui.dashboard.canvas.CanvasActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.RegisterActivity"
             android:exported="false" />
         <activity

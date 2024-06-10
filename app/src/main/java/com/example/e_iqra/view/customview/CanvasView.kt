@@ -21,13 +21,13 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private lateinit var extraCanvas: Canvas
     private lateinit var extraBitmap: Bitmap
 
+    private var storedBitmap: Bitmap? = null
+
     init {
-        // Inisialisasi tambahan jika diperlukan
         setupDrawing()
     }
 
     private fun setupDrawing() {
-        // Pengaturan tambahan untuk paint atau lainnya
         paint.color = drawColor
         paint.style = Paint.Style.STROKE
         paint.isAntiAlias = true
@@ -39,6 +39,11 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         extraBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         extraCanvas = Canvas(extraBitmap)
         extraCanvas.drawColor(backgroundColor)
+
+        // Memulihkan coretan jika ada
+        storedBitmap?.let {
+            extraCanvas.drawBitmap(it, 0f, 0f, null)
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -62,11 +67,29 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             }
             MotionEvent.ACTION_UP -> {
                 path.reset()
+                storedBitmap = Bitmap.createBitmap(extraBitmap)
             }
             else -> return false
         }
 
         invalidate()
         return true
+    }
+
+    fun setBitmap(bitmap: Bitmap) {
+        extraBitmap = Bitmap.createBitmap(bitmap)
+        extraCanvas = Canvas(extraBitmap)
+        invalidate()
+    }
+
+    fun getBitmap(): Bitmap {
+        return extraBitmap
+    }
+
+    fun clearCanvas() {
+        path.reset()
+        extraCanvas.drawColor(backgroundColor)
+        storedBitmap = null
+        invalidate()
     }
 }
