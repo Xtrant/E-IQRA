@@ -6,50 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".view.main.ui.dashboard.DashboardFragment">
 
-    <com.example.e_iqra.view.customview.CanvasView
-        android:id="@+id/canvasView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/canvasButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <ImageView
-        android:id="@+id/iv_result"
-        android:layout_width="0dp"
-        android:layout_height="720dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/canvasButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/canvasButton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="96dp"
-        android:text="@string/analyze_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/canvasView" />
-
-    <ImageView
-        android:id="@+id/btn_gallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@color/soft_blue"
-        android:contentDescription="@string/content_description_galeryAccess"
-        android:src="@drawable/gallery_access"
-        app:layout_constraintBottom_toBottomOf="@+id/canvasButton"
+        android:text="@string/btn_canvas"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/canvasButton"
-        app:layout_constraintTop_toTopOf="@+id/canvasButton" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
