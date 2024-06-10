@@ -1,15 +1,13 @@
 package com.example.e_iqra.view.main.ui.dashboard
 
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsets
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.e_iqra.databinding.FragmentDashboardBinding
-import com.example.e_iqra.view.customview.CanvasView
+import com.example.e_iqra.view.main.ui.dashboard.canvas.CanvasActivity
 
 class DashboardFragment : Fragment() {
 
@@ -21,23 +19,22 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val canvasView: CanvasView = binding.canvasView
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            activity?.window?.setDecorFitsSystemWindows(false)
-            activity?.window?.insetsController?.hide(WindowInsets.Type.systemBars())
-        } else {
-            @Suppress("DEPRECATION")
-            canvasView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        }
-
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupAction()
+    }
+
+    private fun setupAction() {
+        binding.canvasButton.setOnClickListener {
+            val intent = Intent(requireContext(), CanvasActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {
