@@ -21,6 +21,12 @@
             android:name=".view.tryapipredict.TryApiPredict"
             android:exported="false" />
         <activity
+            android:name=".view.tryprofile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.tryprofile.TryProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.main.ui.dashboard.canvas.AnalyzeActivity"
             android:exported="false" />
         <activity

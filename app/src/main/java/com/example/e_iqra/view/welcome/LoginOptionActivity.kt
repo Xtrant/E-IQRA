@@ -53,20 +53,13 @@ class LoginOptionActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-
-        binding.logout.setOnClickListener {
-            logout()
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
     }
-    private fun logout() {
-        lifecycleScope.launch {
-            val credentialManager = CredentialManager.create(this@LoginOptionActivity)
 
-            auth.signOut()
-            credentialManager.clearCredentialState(ClearCredentialStateRequest())
-
+    override fun onStart() {
+        super.onStart()
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 }
