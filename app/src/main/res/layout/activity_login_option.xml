@@ -31,9 +31,9 @@
         android:layout_marginBottom="8dp"
         android:text="@string/signup"
         app:cornerRadius="8dp"
-        app:layout_constraintBottom_toTopOf="@id/buttonLogin"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/buttonLogin"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLogin"

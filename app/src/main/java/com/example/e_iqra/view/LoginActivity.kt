@@ -25,6 +25,7 @@ import com.example.e_iqra.data.user.User
 import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityLoginBinding
 import com.example.e_iqra.view.main.MainActivity
+import com.example.e_iqra.view.tryapipredict.TryApiPredict
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -56,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
         playAnimation()
         setMyButtonEnable()
 
+
         binding.etEmail.addTextChangedListener(MyTextWatcher())
         binding.etPass.addTextChangedListener(MyTextWatcher())
 
@@ -84,9 +86,7 @@ class LoginActivity : AppCompatActivity() {
 
         userRepository.loginUser(auth, email, password) {
             if (it.isSuccessful) {
-
                 Toast.makeText(this, "Nice, Your Login is Successfully", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
             } else {
                 Toast.makeText(
                     this,

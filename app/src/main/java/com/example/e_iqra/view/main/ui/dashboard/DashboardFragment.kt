@@ -1,10 +1,16 @@
 package com.example.e_iqra.view.main.ui.dashboard
 
+import android.net.Uri
+import android.os.Build
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.e_iqra.databinding.FragmentDashboardBinding
 import com.example.e_iqra.view.main.ui.dashboard.canvas.CanvasActivity
@@ -41,4 +47,6 @@ class DashboardFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
