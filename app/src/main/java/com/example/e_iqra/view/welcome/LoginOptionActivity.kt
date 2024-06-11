@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.credentials.ClearCredentialStateRequest
-import androidx.credentials.CredentialManager
-import androidx.lifecycle.lifecycleScope
 import com.example.e_iqra.databinding.ActivityLoginOptionBinding
 import com.example.e_iqra.view.LoginActivity
 import com.example.e_iqra.view.RegisterActivity
@@ -16,7 +13,6 @@ import com.example.e_iqra.view.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
 
 class LoginOptionActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
