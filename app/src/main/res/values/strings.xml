@@ -38,4 +38,10 @@
     <string name="analyze">Analisis</string>
     <string name="analyze_title">Analyze</string>
     <string name="content_description_galeryAccess">btn_galery_access</string>
+    <string name="canvas_done">Done</string>
+    <string name="reset_canvas">Reset Canvas</string>
+    <string name="toggle_size">Layout Mode</string>
+    <string name="hasil_prediksi">Hasil Prediksi</string>
+    <string name="article">Article</string>
+    <string name="search">Cari</string>
 </resources>

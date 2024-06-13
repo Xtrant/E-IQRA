@@ -1,5 +1,6 @@
 package com.example.e_iqra.view.main.ui.quiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -8,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.e_iqra.R
 import com.example.e_iqra.databinding.ActivityQuizResultBinding
+import com.example.e_iqra.view.main.MainActivity
 
 class QuizResultActivity : AppCompatActivity() {
 
@@ -26,18 +28,26 @@ class QuizResultActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        setupAction()
+    }
 
+    private fun setupAction() {
         textResultTitle = findViewById(R.id.text_result_title)
         textCorrectAnswers = findViewById(R.id.text_correct_answers)
         textWrongAnswers = findViewById(R.id.text_wrong_answers)
 
-        // Ambil data hasil quiz dari intent
         val totalCorrectAnswers = intent.getIntExtra("TOTAL_CORRECT_ANSWERS", 0)
         val totalQuestions = intent.getIntExtra("TOTAL_QUESTIONS", 0)
         val totalWrongAnswers = totalQuestions - totalCorrectAnswers
 
-        // Tampilkan hasil quiz pada TextViews
         textCorrectAnswers.text = "Correct Answers: $totalCorrectAnswers"
         textWrongAnswers.text = "Wrong Answers: $totalWrongAnswers"
+
+        binding.buttonBackToMenu.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish()
+        }
     }
 }

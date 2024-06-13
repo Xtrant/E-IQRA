@@ -77,10 +77,17 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     }
 
     fun setBitmap(bitmap: Bitmap) {
-        extraBitmap = Bitmap.createBitmap(bitmap)
+        val mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+
+        extraBitmap.recycle()
+        extraBitmap = Bitmap.createBitmap(mutableBitmap.width, mutableBitmap.height, Bitmap.Config.ARGB_8888)
         extraCanvas = Canvas(extraBitmap)
+
+        extraCanvas.drawBitmap(mutableBitmap, 0f, 0f, null)
+
         invalidate()
     }
+
 
     fun getBitmap(): Bitmap {
         return extraBitmap

@@ -14,8 +14,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.e_iqra.R
-import com.example.e_iqra.data.api.ApiConfig
-import com.example.e_iqra.data.api.FileUploadResponse
 import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityTryApiPredictBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -25,10 +23,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.HttpException
-import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream

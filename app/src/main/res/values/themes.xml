@@ -2,10 +2,26 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.EIQRA" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/blue_200</item>
+        <item name="colorPrimary">@color/primary_color</item>
         <item name="colorOnPrimary">@color/white</item>
-    </style>
+        <item name="colorSecondary">@color/secondary_color</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorTertiary">@color/tertiary_color</item>
+        <item name="colorOnTertiary">@color/ontertiary_color</item>
 
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/onprimary_container</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/onsecondary_container</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/ontertiary_container</item>
+
+        <item name="colorError">@color/error_color</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="colorSurface">@color/surface_color</item>
+        <item name="colorOnSurface">@color/onsurface_color</item>
+        <item name="colorSurfaceContainer">@color/surface_container</item>
+    </style>
     <style name="Theme.EIQRA" parent="Base.Theme.EIQRA" />
 </resources>

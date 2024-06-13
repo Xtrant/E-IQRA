@@ -1,11 +1,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.main.ui.quiz.QuizActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/multiple_choice_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,66 +14,94 @@
         android:padding="16dp"
         android:visibility="gone">
 
+        <ImageView
+            android:id="@+id/question_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
+
         <TextView
-            android:id="@+id/question_text"
+            android:id="@+id/question_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Question will appear here"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginTop="8dp"
+            android:text="What is the name of the toy cowboy in Toy Story?"
+            android:textSize="22sp"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@id/question_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <RadioGroup
-            android:id="@+id/answer_group"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/option_one"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Option 1"
+            app:cornerRadius="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/question_prompt"
+            app:layout_constraintEnd_toStartOf="@id/option_two"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/option_two"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:text="Option 2"
+            app:cornerRadius="8dp"
+            app:layout_constraintStart_toEndOf="@id/option_one"
+            app:layout_constraintTop_toBottomOf="@id/question_prompt"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/option_three"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Option 3"
+            app:cornerRadius="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/option_one"
+            app:layout_constraintEnd_toStartOf="@id/option_four"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/option_four"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:text="Option 4"
+            app:cornerRadius="8dp"
+            app:layout_constraintStart_toEndOf="@id/option_three"
+            app:layout_constraintTop_toBottomOf="@id/option_two"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/option1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Option 1"/>
-
-            <RadioButton
-                android:id="@+id/option2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Option 2"/>
-
-            <RadioButton
-                android:id="@+id/option3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Option 3"/>
-
-            <RadioButton
-                android:id="@+id/option4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Option 4"/>
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Submit"/>
-
-        <TextView
-            android:id="@+id/result_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:text="Next Question"
+            app:layout_constraintTop_toBottomOf="@id/option_four"/>
 
         <Button
             android:id="@+id/finish_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/option_four"
             android:text="Selesai"
             android:visibility="gone"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/drawing_layout"
@@ -90,7 +119,7 @@
             android:textSize="18sp"
             android:layout_marginBottom="16dp"/>
 
-        <ImageView
+        <com.example.e_iqra.view.customview.CanvasView
             android:id="@+id/drawing_canvas"
             android:layout_width="match_parent"
             android:layout_height="300dp"
@@ -101,14 +130,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit Drawing"/>
-
-        <TextView
-            android:id="@+id/drawing_result_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -3,52 +3,42 @@ package com.example.e_iqra.view.main.ui.quiz
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.e_iqra.R
+import com.example.e_iqra.databinding.ActivityQuizBinding
 import com.example.e_iqra.data.Question
 import com.example.e_iqra.data.QuestionType
-import com.example.e_iqra.databinding.ActivityQuizBinding
 import java.io.ByteArrayOutputStream
 
 class QuizActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuizBinding
     private var currentQuestionIndex = 0
-
-    private lateinit var multipleChoiceLayout: View
-    private lateinit var drawingLayout: View
-
-    private lateinit var questionText: TextView
-    private lateinit var answerGroup: RadioGroup
-    private lateinit var resultText: TextView
-
-    private lateinit var drawingQuestionText: TextView
-    private lateinit var drawingCanvas: ImageView
-    private lateinit var drawingResultText: TextView
-
     private var totalCorrectAnswers = 0
+    private var selectedOption: Button? = null
+    private var isAnswered = false // Track if the current question is answered
 
     private val questionList = listOf(
         Question(
-            questionText = "What is the capital of France?",
-            options = arrayOf("Paris", "London", "Berlin", "Madrid"),
+            questionText = "Huruf apakah ini",
+            image = R.drawable.alif,
+            options = arrayOf("Alif", "Dzal", "Syin", "Tha'"),
             correctAnswerIndex = 0,
             type = QuestionType.MULTIPLE_CHOICE
         ),
         Question(
-            questionText = "Which one is the largest planet in our Solar System?",
-            options = arrayOf("Earth", "Mars", "Jupiter", "Saturn"),
-            correctAnswerIndex = 2,
+            questionText = "Huruf apakah ini",
+            image = R.drawable.jim,
+            options = arrayOf("Lam Alif", "Ya", "Kha'", "Jim"),
+            correctAnswerIndex = 3,
             type = QuestionType.MULTIPLE_CHOICE
         ),
         Question(
@@ -70,143 +60,175 @@ class QuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+
+        // Disable 'Next Question' button initially
+        binding.nextButton.isEnabled = false
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        multipleChoiceLayout = findViewById(R.id.multiple_choice_layout)
-        drawingLayout = findViewById(R.id.drawing_layout)
-
-        questionText = findViewById(R.id.question_text)
-        answerGroup = findViewById(R.id.answer_group)
-        resultText = findViewById(R.id.result_text)
-
-        drawingQuestionText = findViewById(R.id.drawing_question_text)
-        drawingCanvas = findViewById(R.id.drawing_canvas)
-        drawingResultText = findViewById(R.id.drawing_result_text)
-
         showQuestion(currentQuestionIndex)
 
-        findViewById<View>(R.id.submit_button).setOnClickListener {
+        binding.finishButton.setOnClickListener {
             checkAnswer()
         }
 
-        findViewById<View>(R.id.submit_drawing_button).setOnClickListener {
+        binding.submitDrawingButton.setOnClickListener {
             checkDrawingAnswer()
         }
 
-        val finishButton = findViewById<Button>(R.id.finish_button)
-        finishButton.setOnClickListener {
-            navigateToResultQuiz()
+        binding.nextButton.setOnClickListener {
+            nextQuestion()
         }
+
+        binding.optionOne.setOnClickListener { selectOption(binding.optionOne) }
+        binding.optionTwo.setOnClickListener { selectOption(binding.optionTwo) }
+        binding.optionThree.setOnClickListener { selectOption(binding.optionThree) }
+        binding.optionFour.setOnClickListener { selectOption(binding.optionFour) }
     }
 
     private fun showQuestion(questionIndex: Int) {
         if (questionIndex >= questionList.size) {
-            resultText.text = "Quiz finished!"
-            drawingResultText.text = "Quiz finished!"
             return
         }
 
         val question = questionList[questionIndex]
         when (question.type) {
             QuestionType.MULTIPLE_CHOICE -> {
-                multipleChoiceLayout.visibility = View.VISIBLE
-                drawingLayout.visibility = View.GONE
-                questionText.text = question.questionText
-                answerGroup.clearCheck()
-                question.options?.let {
-                    (answerGroup.getChildAt(0) as RadioButton).text = it[0]
-                    (answerGroup.getChildAt(1) as RadioButton).text = it[1]
-                    (answerGroup.getChildAt(2) as RadioButton).text = it[2]
-                    (answerGroup.getChildAt(3) as RadioButton).text = it[3]
+                binding.multipleChoiceLayout.visibility = View.VISIBLE
+                binding.drawingLayout.visibility = View.GONE
+                binding.questionPrompt.text = question.questionText
+
+                question.image?.let { imageResId ->
+                    binding.questionImage.setImageResource(imageResId)
+                    binding.questionImage.visibility = View.VISIBLE
+                } ?: run {
+                    binding.questionImage.visibility = View.GONE
                 }
-                findViewById<View>(R.id.submit_button).visibility = View.VISIBLE
-                findViewById<View>(R.id.submit_drawing_button).visibility = View.GONE
+
+                binding.optionOne.text = question.options?.get(0) ?: ""
+                binding.optionTwo.text = question.options?.get(1) ?: ""
+                binding.optionThree.text = question.options?.get(2) ?: ""
+                binding.optionFour.text = question.options?.get(3) ?: ""
+
+                resetOptionColors()
+
+                binding.finishButton.visibility = View.VISIBLE
+                binding.submitDrawingButton.visibility = View.GONE
             }
             QuestionType.DRAWING -> {
-                multipleChoiceLayout.visibility = View.GONE
-                drawingLayout.visibility = View.VISIBLE
-                drawingQuestionText.text = question.questionText
-                findViewById<View>(R.id.submit_button).visibility = View.GONE
-                findViewById<View>(R.id.submit_drawing_button).visibility = View.VISIBLE
+                binding.multipleChoiceLayout.visibility = View.GONE
+                binding.drawingLayout.visibility = View.VISIBLE
+                binding.drawingQuestionText.text = question.questionText
+                resetCanvas()
+                binding.finishButton.visibility = View.GONE
+                binding.submitDrawingButton.visibility = View.VISIBLE
             }
         }
 
-        // Cek jika ini adalah pertanyaan terakhir
-        if (questionIndex == questionList.size - 1 && question.type == QuestionType.DRAWING) {
-            findViewById<View>(R.id.submit_button).visibility = View.GONE
-            findViewById<View>(R.id.submit_drawing_button).visibility = View.VISIBLE
-        }
+        // Check if this is the last question
+        binding.nextButton.visibility = if (questionIndex == questionList.size - 1) View.GONE else View.VISIBLE
+        binding.finishButton.visibility = if (questionIndex == questionList.size - 1) View.VISIBLE else View.GONE
+
+        // Reset isAnswered flag
+        isAnswered = false
     }
 
+    private fun selectOption(option: Button) {
+        resetOptionColors() // Reset all options background to dark gray
+        selectedOption = option
+        selectedOption?.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_light))
 
+        // Enable 'Next Question' button after selecting an option
+        binding.nextButton.isEnabled = true
+    }
+
+    private fun resetOptionColors() {
+        selectedOption = null
+        binding.optionOne.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
+        binding.optionTwo.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
+        binding.optionThree.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
+        binding.optionFour.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
+    }
 
     private fun checkAnswer() {
-        val selectedId = answerGroup.checkedRadioButtonId
-        if (selectedId == -1) {
-            resultText.text = "Please select an answer"
+        if (selectedOption == null) {
+            Toast.makeText(this, "Please select an answer", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val selectedRadioButton = findViewById<RadioButton>(selectedId)
-        val selectedIndex = answerGroup.indexOfChild(selectedRadioButton)
+        val selectedIndex = when (selectedOption) {
+            binding.optionOne -> 0
+            binding.optionTwo -> 1
+            binding.optionThree -> 2
+            binding.optionFour -> 3
+            else -> -1
+        }
+
         val currentQuestion = questionList[currentQuestionIndex]
 
         if (selectedIndex == currentQuestion.correctAnswerIndex) {
             totalCorrectAnswers++
-            resultText.text = "Correct!"
-        } else {
-            resultText.text = "Incorrect. The correct answer is ${currentQuestion.options?.get(currentQuestion.correctAnswerIndex!!)}"
         }
 
+        // Reset selected option and disable 'Next Question' button again
+        selectedOption = null
+        binding.nextButton.isEnabled = false
+
+        // Move to the next question
+        nextQuestion()
+    }
+
+    private fun nextQuestion() {
         currentQuestionIndex++
         if (currentQuestionIndex < questionList.size) {
             showQuestion(currentQuestionIndex)
         } else {
-            resultText.text = "Quiz finished!"
+            navigateToResultQuiz()
         }
     }
 
-
     private fun checkDrawingAnswer() {
-        // Ambil gambar dari ImageView (drawingCanvas)
-        val bitmap = getBitmapFromView(drawingCanvas)
+        val bitmap = getBitmapFromView(binding.drawingCanvas)
 
-        // Konversi bitmap ke byte array
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         val byteArray = stream.toByteArray()
 
-        // Kirim byte array ke model ML (pseudo-code, ganti dengan implementasi nyata)
         val isDrawingCorrect = checkDrawingWithMLModel(byteArray)
 
-        drawingResultText.text = if (isDrawingCorrect) {
-            "Drawing is correct!"
-        } else {
-            "Drawing is incorrect."
+        if (isDrawingCorrect) {
+            totalCorrectAnswers++
         }
 
-        // Periksa apakah ini adalah pertanyaan terakhir
-        if (currentQuestionIndex == questionList.size - 1) {
-            navigateToResultQuiz()
-        } else {
-            currentQuestionIndex++
-            showQuestion(currentQuestionIndex)
-        }
+        binding.nextButton.performClick()
     }
-
-
 
     private fun getBitmapFromView(view: View): Bitmap {
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap
+    }
+
+    private fun resetCanvas() {
+        val drawingCanvas = binding.drawingCanvas
+        val canvasWidth = drawingCanvas.width
+        val canvasHeight = drawingCanvas.height
+
+        if (canvasWidth <= 0 || canvasHeight <= 0) {
+            drawingCanvas.post { resetCanvas() }
+            return
+        }
+
+        val blankBitmap = Bitmap.createBitmap(canvasWidth, canvasHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(blankBitmap)
+        canvas.drawColor(Color.WHITE)
+        drawingCanvas.setBitmap(blankBitmap)
     }
 
     private fun navigateToResultQuiz() {
@@ -218,9 +240,8 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun checkDrawingWithMLModel(byteArray: ByteArray): Boolean {
-        // Pseudo-code: kirim byteArray ke model ML dan terima hasilnya
-        // Ganti dengan implementasi nyata yang memanggil model ML
-        return true // Asumsikan jawaban selalu benar untuk sekarang
+        // Pseudo-code: send byteArray to ML model and get the result
+        // Replace with real implementation that calls the ML model
+        return true // Assume the answer is always correct for now
     }
-
 }

@@ -87,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
         userRepository.loginUser(auth, email, password) {
             if (it.isSuccessful) {
                 Toast.makeText(this, "Nice, Your Login is Successfully", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
             } else {
                 Toast.makeText(
                     this,

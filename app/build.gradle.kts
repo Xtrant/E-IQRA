@@ -70,4 +70,6 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     annotationProcessor (libs.compiler)
+
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
 }
