@@ -21,4 +21,5 @@
     <color name="surface_color">#F5FAFD</color>
     <color name="onsurface_color">#171C1F</color>
     <color name="surface_container">#EAEEf2</color>
+    <color name="green">#83C5BE</color>
 </resources>

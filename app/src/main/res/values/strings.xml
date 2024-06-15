@@ -44,4 +44,12 @@
     <string name="hasil_prediksi">Hasil Prediksi</string>
     <string name="article">Article</string>
     <string name="search">Cari</string>
+    <string name="selamat_datang">Selamat Datang</string>
+    <string name="explain1">Mulai perjalanan belajar huruf hijaiyah dengan cara yang menyenangkan.</string>
+    <string name="next">Berikutnya</string>
+    <string name="drawing">Pelajari dengan Menggambar Langsung</string>
+    <string name="explain2">Pelajari huruf hijaiyah dengan cara menggambar langsung, lebih interaktif dan menyenangkan!</string>
+    <string name="quiz_feature">Uji Pengetahuan</string>
+    <string name="explain3">Uji pemahaman Anda melalui quiz interaktif yang menantang</string>
+    <string name="learning">Temukan Doa dan Pengetahuan Islam</string>
 </resources>

@@ -9,7 +9,7 @@ import retrofit2.http.Part
 
 interface ApiService {
     @Multipart
-    @POST("predict")
+    @POST("/v1/predict")
     suspend fun uploadImage(
         @Part file: MultipartBody.Part
 

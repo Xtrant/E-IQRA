@@ -27,7 +27,7 @@ class ApiConfig {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://model-api-j62sigqpvq-et.a.run.app/")
+            .baseUrl("https://iqro-api-j62sigqpvq-et.a.run.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

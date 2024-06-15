@@ -35,15 +35,10 @@ class CanvasActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
 
-        val fabToggleSize = binding.fabToggleSize
         val fabDone = binding.fabDone
         val fabRefresh = binding.fabRefresh
 
-        updateFabIcon()
-
-        fabToggleSize.setOnClickListener {
-            toggleCanvasSize()
-        }
+//        updateFabIcon()
 
         fabDone.setOnClickListener {
             saveImageAndShowResult()
@@ -53,6 +48,7 @@ class CanvasActivity : AppCompatActivity() {
             refreshCanvas()
         }
 
+        // Restore bitmap file path if available
         bitmapFilePath = savedInstanceState?.getString(KEY_BITMAP_PATH)
         bitmapFilePath?.let {
             val bitmap = BitmapFactory.decodeFile(it)
@@ -87,17 +83,17 @@ class CanvasActivity : AppCompatActivity() {
             binding.toolbar.visibility = View.GONE
             isFullScreen = true
         }
-        updateFabIcon()
+//        updateFabIcon()
     }
 
-    private fun updateFabIcon() {
-        val fabToggleSize = binding.fabToggleSize
-        if (isFullScreen) {
-            fabToggleSize.setImageResource(R.drawable.ic_fullscreen_exit_24)
-        } else {
-            fabToggleSize.setImageResource(R.drawable.ic_fullscreen_24)
-        }
-    }
+//    private fun updateFabIcon() {
+//        val fabToggleSize = binding.fabToggleSize
+//        if (isFullScreen) {
+//            fabToggleSize.setImageResource(R.drawable.ic_fullscreen_exit_24)
+//        } else {
+//            fabToggleSize.setImageResource(R.drawable.ic_fullscreen_24)
+//        }
+//    }
 
     private fun refreshCanvas() {
         binding.drawView.clearCanvas()

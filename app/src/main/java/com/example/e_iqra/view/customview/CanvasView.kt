@@ -40,7 +40,7 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         extraCanvas = Canvas(extraBitmap)
         extraCanvas.drawColor(backgroundColor)
 
-        // Memulihkan coretan jika ada
+        // Restore previous drawings if any
         storedBitmap?.let {
             extraCanvas.drawBitmap(it, 0f, 0f, null)
         }
@@ -48,7 +48,9 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.drawBitmap(extraBitmap, 0f, 0f, null)
+        if (::extraBitmap.isInitialized) {
+            canvas.drawBitmap(extraBitmap, 0f, 0f, null)
+        }
         canvas.drawPath(path, paint)
     }
 
@@ -79,7 +81,7 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     fun setBitmap(bitmap: Bitmap) {
         val mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
 
-        extraBitmap.recycle()
+        if (::extraBitmap.isInitialized) extraBitmap.recycle()
         extraBitmap = Bitmap.createBitmap(mutableBitmap.width, mutableBitmap.height, Bitmap.Config.ARGB_8888)
         extraCanvas = Canvas(extraBitmap)
 
@@ -88,9 +90,12 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         invalidate()
     }
 
-
     fun getBitmap(): Bitmap {
-        return extraBitmap
+        return if (::extraBitmap.isInitialized) {
+            extraBitmap
+        } else {
+            Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888) // return an empty bitmap if not initialized
+        }
     }
 
     fun clearCanvas() {

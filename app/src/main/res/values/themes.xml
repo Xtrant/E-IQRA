@@ -19,6 +19,8 @@
         <item name="colorError">@color/error_color</item>
         <item name="colorOnError">@color/white</item>
 
+        <item name="background">@color/green</item>
+
         <item name="colorSurface">@color/surface_color</item>
         <item name="colorOnSurface">@color/onsurface_color</item>
         <item name="colorSurfaceContainer">@color/surface_container</item>

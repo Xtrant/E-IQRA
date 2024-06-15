@@ -1,16 +1,12 @@
 package com.example.e_iqra.view.welcome
 
-import android.content.Context
-import android.content.Intent
+
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import com.example.e_iqra.R
 import com.example.e_iqra.databinding.ActivityWelcomeBinding
-import com.example.e_iqra.view.RegisterActivity
-import com.example.e_iqra.view.main.MainActivity
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -37,24 +33,28 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val isFirstTime = sharedPreferences.getBoolean("isFirstTime", true)
+//        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+//        val isFirstTime = sharedPreferences.getBoolean("isFirstTime", true)
+//
+//        if (isFirstTime) {
+//            setContentView(R.layout.activity_welcome)
+//            val editor = sharedPreferences.edit()
+//            editor.putBoolean("isFirstTime", false)
+//            editor.apply()
+//        } else {
+//            val intent = Intent(this, LoginOptionActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//
+//        binding.button.setOnClickListener {
+//            val intent = Intent(this, RegisterActivity::class.java)
+//            startActivity(intent)
+//        }
+    }
 
-        if (isFirstTime) {
-            setContentView(R.layout.activity_welcome)
-            val editor = sharedPreferences.edit()
-            editor.putBoolean("isFirstTime", false)
-            editor.apply()
-        } else {
-            val intent = Intent(this, LoginOptionActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+    private fun setupTransition() {
 
-        binding.button.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
     }
 }
 
