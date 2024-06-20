@@ -16,5 +16,9 @@ interface ApiService {
     ): FileUploadResponse
 
     @GET("api")
-    fun getDoaList(): Call<List<DoaResponseItem>>
+    fun getDoaList(
+    ): Call<List<DoaResponseItem>>
+
+    @GET("/quran/asma")
+    fun getAsmaList() : Call<List<DataItem>>
 }

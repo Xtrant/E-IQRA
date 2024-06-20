@@ -1,7 +1,11 @@
 package com.example.e_iqra.view.customview
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Path
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -40,7 +44,6 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         extraCanvas = Canvas(extraBitmap)
         extraCanvas.drawColor(backgroundColor)
 
-        // Restore previous drawings if any
         storedBitmap?.let {
             extraCanvas.drawBitmap(it, 0f, 0f, null)
         }
@@ -94,11 +97,14 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         return if (::extraBitmap.isInitialized) {
             extraBitmap
         } else {
-            Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888) // return an empty bitmap if not initialized
+            Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
         }
     }
 
     fun clearCanvas() {
+        if (!::extraCanvas.isInitialized || !::extraBitmap.isInitialized) {
+            return
+        }
         path.reset()
         extraCanvas.drawColor(backgroundColor)
         storedBitmap = null

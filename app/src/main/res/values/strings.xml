@@ -52,4 +52,19 @@
     <string name="quiz_feature">Uji Pengetahuan</string>
     <string name="explain3">Uji pemahaman Anda melalui quiz interaktif yang menantang</string>
     <string name="learning">Temukan Doa dan Pengetahuan Islam</string>
+    <string name="question">Question</string>
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
+    <string name="option_3">Option 3</string>
+    <string name="option_4">Option 4</string>
+    <string name="draw_your_answer">Draw your answer</string>
+    <string name="clear">Clear</string>
+    <string name="next_quest_multiple">Ke Soal Berikutny</string>
+    <string name="next_quest">Next</string>
+    <string name="question_image">Question Image</string>
+    <string name="learn_doa">Pelajari Doa untuk Sehari-hari</string>
+    <string name="learn_asma">Yuk Pelajari Asmaul Husna</string>
+    <string name="terjemahan_asmaul_husna">Terjemahan Asmaul Husna</string>
+    <string name="asmaul_husna">Asmaul Husna</string>
+    <string name="latin_asmaul_husna">Latin Asmaul Husna</string>
 </resources>

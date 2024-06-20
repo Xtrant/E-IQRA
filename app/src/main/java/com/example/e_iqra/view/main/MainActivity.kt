@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = binding.navView
         bottomNavigationView.setupWithNavController(navController)
 
+
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.mobile_navigation, false)

@@ -1,14 +1,10 @@
-package com.example.e_iqra.view.main.ui.home
-
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavController
-import androidx.navigation.NavDirections
 import com.example.e_iqra.data.api.ApiConfig
+import com.example.e_iqra.data.api.DataItem
 import com.example.e_iqra.data.api.DoaResponseItem
 import com.example.e_iqra.view.main.ui.dashboard.canvas.AnalyzeActivity
 import com.example.e_iqra.view.main.ui.dashboard.canvas.CanvasActivity
@@ -25,15 +21,21 @@ class HomeViewModel : ViewModel() {
     private val _filteredDoaList = MutableLiveData<List<DoaResponseItem>>()
     val filteredDoaList: LiveData<List<DoaResponseItem>> get() = _filteredDoaList
 
+    private val _asmaList = MutableLiveData<List<DataItem>>()
+    val asmaList: LiveData<List<DataItem>> get() = _asmaList
+
     private val _slides = MutableLiveData<List<String>>()
     val slides: LiveData<List<String>> get() = _slides
+
     private val _descriptions = MutableLiveData<List<String>>()
     val descriptions: LiveData<List<String>> get() = _descriptions
+
     private val _buttonTexts = MutableLiveData<List<String>>()
     val buttonTexts: LiveData<List<String>> get() = _buttonTexts
 
     init {
         fetchDoaList()
+        fetchAsmaList()
         updateSlides()
     }
 
@@ -43,7 +45,7 @@ class HomeViewModel : ViewModel() {
             override fun onResponse(call: Call<List<DoaResponseItem>>, response: Response<List<DoaResponseItem>>) {
                 if (response.isSuccessful) {
                     val doaList = response.body()
-                    _doaList.postValue(doaList!!)
+                    _doaList.postValue(doaList ?: emptyList())
                 } else {
                     _doaList.postValue(emptyList())
                 }
@@ -55,9 +57,30 @@ class HomeViewModel : ViewModel() {
         })
     }
 
+    fun fetchAsmaList() {
+        val call = ApiConfig.getAsmaApiService().getAsmaList()
+        call.enqueue(object : Callback<List<DataItem>> {
+            override fun onResponse(call: Call<List<DataItem>>, response: Response<List<DataItem>>) {
+                if (response.isSuccessful) {
+                    val asmaList = response.body()
+                    _asmaList.postValue(asmaList ?: emptyList())
+                } else {
+                    _asmaList.postValue(emptyList())
+                }
+            }
+
+            override fun onFailure(call: Call<List<DataItem>>, t: Throwable) {
+                _asmaList.postValue(emptyList())
+            }
+        })
+    }
+
     fun searchDoa(query: String) {
         val filteredList = _doaList.value?.filter {
-            it.doa!!.contains(query, true) || it.ayat!!.contains(query, true) || it.latin!!.contains(query, true) || it.artinya!!.contains(query, true)
+            it.doa?.contains(query, true) ?: false ||
+                    it.ayat?.contains(query, true) ?: false ||
+                    it.latin?.contains(query, true) ?: false ||
+                    it.artinya?.contains(query, true) ?: false
         } ?: emptyList()
         _filteredDoaList.postValue(filteredList)
     }
@@ -105,4 +128,3 @@ class HomeViewModel : ViewModel() {
         )
     }
 }
-
