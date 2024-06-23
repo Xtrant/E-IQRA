@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.e_iqra.R
 import com.example.e_iqra.databinding.ActivityQuizResultBinding
 import com.example.e_iqra.view.ViewModelFactory
@@ -20,6 +20,7 @@ class QuizResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         val score = intent.getIntExtra("SCORE", 0)
         val totalQuestions = intent.getIntExtra("TOTAL_QUESTIONS", 0)
@@ -38,9 +39,10 @@ class QuizResultActivity : AppCompatActivity() {
         }
 
         binding.backButton.setOnClickListener {
-            findNavController(R.id.nav_host_fragment_activity_main).navigate(R.id.navigation_dashboard)
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+            val navController = navHostFragment.navController
+            navController.navigate(R.id.navigation_learn)
         }
-
     }
 
     private fun displayQuestionSummary(summaryList: List<String>) {

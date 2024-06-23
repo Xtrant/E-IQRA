@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.ui.dashboard.canvas.CanvasActivity">
+    android:background="#d5dbdc"
+    tools:context=".view.main.ui.learning.canvas.CanvasActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,8 +22,9 @@
         android:id="@+id/drawView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="16dp"
         app:layout_constraintDimensionRatio="H,3:4"
-        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -36,7 +38,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_refresh_24"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/drawView"
         app:layout_constraintBottom_toTopOf="@id/fab_done"
         app:backgroundTint="@color/blue" />
 
@@ -46,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:contentDescription="@string/canvas_done"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/drawView"
         app:layout_constraintBottom_toBottomOf="@id/drawView"
         android:layout_margin="16dp"
         android:src="@drawable/ic_check_24"

@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_iqra.databinding.ItemSliderBinding
 
 class SlideAdapter(
-    private val slides: List<String>,
     private val descriptions: List<String>,
     private val buttonTexts: List<String>,
+    private val slideImages: List<Int>,
     private val onButtonClick: (position: Int) -> Unit
 ) : RecyclerView.Adapter<SlideAdapter.SlideViewHolder>() {
 
@@ -18,20 +18,20 @@ class SlideAdapter(
     }
 
     override fun onBindViewHolder(holder: SlideViewHolder, position: Int) {
-        holder.bind(slides[position], descriptions[position], buttonTexts[position], position)
+        holder.bind(descriptions[position], buttonTexts[position], slideImages[position], position)
     }
 
-    override fun getItemCount(): Int = slides.size
+    override fun getItemCount(): Int = descriptions.size
 
     inner class SlideViewHolder(private val binding: ItemSliderBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(title: String, description: String, buttonText: String, position: Int) {
-            binding.tvTitle.text = title
+        fun bind(description: String, buttonText: String, imageRes: Int, position: Int) {
             binding.tvDescription.text = description
             binding.btnView.text = buttonText
+            binding.imageView.setImageResource(imageRes)
+
             binding.btnView.setOnClickListener {
                 onButtonClick(position)
             }
         }
     }
 }
-

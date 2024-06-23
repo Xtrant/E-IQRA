@@ -1,6 +1,5 @@
 package com.example.e_iqra.view.main.ui.home
 
-import HomeViewModel
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider

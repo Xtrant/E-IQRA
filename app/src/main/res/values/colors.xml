@@ -7,19 +7,23 @@
     <color name="white_pink">#F1EEDC</color>
     <color name="soft_pink">#E5DDC5</color>
     <color name="blue_200">#BED7DC</color>
-    <color name="primary_color">#0E6681</color>
-    <color name="secondary_color">#4C616B</color>
-    <color name="primary_container">#BBE9FF</color>
-    <color name="onprimary_container">#001F29</color>
-    <color name="secondary_container">#CFE6f2</color>
-    <color name="onsecondary_container">#081E26</color>
-    <color name="tertiary_color">#895120</color>
-    <color name="ontertiary_color">#2F1400</color>
-    <color name="tertiary_container">#FFDCC4</color>
-    <color name="ontertiary_container">#2F1400</color>
+
+    <color name="primary_color">#006972</color>
+    <color name="secondary_color">#006a64</color>
+    <color name="primary_container">#9df0fb</color>
+    <color name="onprimary_container">#001f23</color>
+    <color name="secondary_container">#9df2e9</color>
+    <color name="onsecondary_container">#00201e</color>
+    <color name="tertiary_color">#006879</color>
+    <color name="tertiary_container">#a9edff</color>
+    <color name="ontertiary_container">#001f26</color>
     <color name="error_color">#BA1A1A</color>
     <color name="surface_color">#F5FAFD</color>
     <color name="onsurface_color">#171C1F</color>
     <color name="surface_container">#EAEEf2</color>
     <color name="green">#83C5BE</color>
+    <color name="yellow_100">#f8e287</color>
+    <color name="green_100">#c5ecce</color>
+
+    <color name="blue_300">#f5fafb</color>
 </resources>

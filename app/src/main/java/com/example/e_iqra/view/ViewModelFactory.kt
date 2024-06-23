@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.e_iqra.data.repository.CanvasRepository
 import com.example.e_iqra.data.repository.QuizRepository
-import com.example.e_iqra.view.main.ui.dashboard.canvas.CanvasViewModel
+import com.example.e_iqra.view.main.ui.learning.canvas.CanvasViewModel
 import com.example.e_iqra.view.main.ui.quiz.QuizViewModel
 
 class ViewModelFactory(private val context: Context): ViewModelProvider.NewInstanceFactory() {

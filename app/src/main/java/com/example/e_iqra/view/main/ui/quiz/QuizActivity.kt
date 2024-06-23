@@ -1,11 +1,13 @@
 package com.example.e_iqra.view.main.ui.quiz
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.e_iqra.R
 import com.example.e_iqra.data.quiz.QuizData
 import com.example.e_iqra.databinding.ActivityQuizBinding
 import com.example.e_iqra.view.ViewModelFactory
@@ -46,7 +48,6 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun generateRandomQuestionIndices() {
-        // Generate random indices for questions, limited to 5
         questionIndices = (0 until QuizData.questions.size).shuffled().take(5)
     }
 
@@ -127,8 +128,9 @@ class QuizActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun onOptionClicked(view: View, selectedOption: Int) {
-        selectedOptionView?.setBackgroundColor(Color.LTGRAY)
+        selectedOptionView?.setBackgroundColor(R.color.primary_color)
         selectedOptionView = view
         view.setBackgroundColor(Color.BLUE)
         userAnswers[questionIndices[currentQuestionIndex]] = selectedOption
@@ -139,11 +141,12 @@ class QuizActivity : AppCompatActivity() {
         binding.nextButton.visibility = View.VISIBLE
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun resetOptionColors() {
-        binding.option1.setBackgroundColor(Color.LTGRAY)
-        binding.option2.setBackgroundColor(Color.LTGRAY)
-        binding.option3.setBackgroundColor(Color.LTGRAY)
-        binding.option4.setBackgroundColor(Color.LTGRAY)
+        binding.option1.setBackgroundColor(R.color.primary_color)
+        binding.option2.setBackgroundColor(R.color.primary_color)
+        binding.option3.setBackgroundColor(R.color.primary_color)
+        binding.option4.setBackgroundColor(R.color.primary_color)
     }
 
     private fun enableOptions() {

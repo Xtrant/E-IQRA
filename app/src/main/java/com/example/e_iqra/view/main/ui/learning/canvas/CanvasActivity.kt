@@ -1,4 +1,4 @@
-package com.example.e_iqra.view.main.ui.dashboard.canvas
+package com.example.e_iqra.view.main.ui.learning.canvas
 
 import android.content.Intent
 import android.graphics.BitmapFactory

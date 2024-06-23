@@ -44,7 +44,7 @@ class QuizRepository(private val context: Context) {
 
             val confidenceScore = client.confidence
 
-            isCorrect = confidenceScore > "70.0"
+            isCorrect = confidenceScore > "50.0"
 
         } catch (e: HttpException) {
             withContext(Dispatchers.Main) {

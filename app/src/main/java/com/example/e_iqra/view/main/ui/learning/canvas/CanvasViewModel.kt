@@ -1,4 +1,4 @@
-package com.example.e_iqra.view.main.ui.dashboard.canvas
+package com.example.e_iqra.view.main.ui.learning.canvas
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel

@@ -9,7 +9,6 @@
     <string name="title_scan">Scan</string>
     <string name="title_profile">Profile</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="hint_password">Enter your password</string>
     <string name="hint_email">Enter your email</string>
     <string name="title_email">Email</string>
@@ -67,4 +66,6 @@
     <string name="terjemahan_asmaul_husna">Terjemahan Asmaul Husna</string>
     <string name="asmaul_husna">Asmaul Husna</string>
     <string name="latin_asmaul_husna">Latin Asmaul Husna</string>
+    <string name="title_learn">Pelajari</string>
+    <string name="coba_sekarang">Coba Sekarang</string>
 </resources>

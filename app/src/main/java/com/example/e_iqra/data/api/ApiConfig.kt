@@ -36,7 +36,6 @@ class ApiConfig {
 
     companion object {
         private const val BASE_URL = "https://doa-doa-api-ahmadramadhan.fly.dev/"
-        private val ASMA_URL = "https://api.dikiotang.com"
 
         fun getDoaApiService(): ApiService {
             val loggingInterceptor = if(BuildConfig.DEBUG) {
@@ -48,22 +47,6 @@ class ApiConfig {
                 .build()
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
-            return retrofit.create(ApiService::class.java)
-        }
-
-        fun getAsmaApiService(): ApiService {
-            val loggingInterceptor = if(BuildConfig.DEBUG) {
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-            } else {
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
-            }
-            val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor)
-                .build()
-            val retrofit = Retrofit.Builder()
-                .baseUrl(ASMA_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
