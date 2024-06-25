@@ -38,6 +38,7 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        dataBinding = true
     }
 }
 
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation("androidx.preference:preference-ktx:1.2.1")
+    implementation ("androidx.datastore:datastore-preferences:1.1.1")
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
@@ -57,6 +59,9 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.androidx.paging.common.android)
+    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.androidx.datastore.preferences.core.jvm)
+    implementation(libs.androidx.databinding.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -70,4 +75,8 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     annotationProcessor (libs.compiler)
+
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("androidx.paging:paging-runtime-ktx:3.0.0")
+
 }

@@ -8,10 +8,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.e_iqra.R
 import com.example.e_iqra.data.user.User
 import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityEditProfileBinding
+import com.example.e_iqra.view.main.MainActivity
+import com.example.e_iqra.view.main.ui.profile.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -19,7 +22,9 @@ import com.google.firebase.ktx.Firebase
 class EditProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditProfileBinding
     private lateinit var userRepository: UserRepository
-    private lateinit var auth : FirebaseAuth
+    private lateinit var auth: FirebaseAuth
+    private lateinit var profileViewModel: ProfileViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
@@ -27,6 +32,9 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
         userRepository = UserRepository()
         auth = Firebase.auth
+
+        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -36,11 +44,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         binding.updtBtn.setOnClickListener {
             updateFirestore()
-            startActivity(Intent(this, TryProfileActivity::class.java))
         }
-
-
-
     }
 
     private fun getDataProfile() {
@@ -59,13 +63,23 @@ class EditProfileActivity : AppCompatActivity() {
         if (uid != null) {
             userRepository.addtoFirestoreGoogle(uid, user) {
                 if (it.isSuccessful) {
-                    Toast.makeText(this, "Success Update Data User", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Data Pengguna Diperbarui", Toast.LENGTH_SHORT).show()
+                    profileViewModel.fetchProfile()
+                    navigateBackToNotificationsFragment()
                 } else {
                     Toast.makeText(this, "Gagal Update Data User", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
+    private fun navigateBackToNotificationsFragment() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
+        finish()
+    }
+
     companion object {
         const val EXTRA_NAME = "extra_name"
         const val EXTRA_EMAIL = "extra_email"

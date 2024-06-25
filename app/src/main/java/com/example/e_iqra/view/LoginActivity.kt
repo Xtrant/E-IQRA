@@ -25,7 +25,6 @@ import com.example.e_iqra.data.user.User
 import com.example.e_iqra.data.user.UserRepository
 import com.example.e_iqra.databinding.ActivityLoginBinding
 import com.example.e_iqra.view.main.MainActivity
-import com.example.e_iqra.view.tryapipredict.TryApiPredict
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -74,11 +73,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        val currentUser = auth.currentUser
-//        updateUI(currentUser)
-//    }
 
     private fun login() {
         val email = binding.etEmail.text.toString().trim()
@@ -86,11 +80,12 @@ class LoginActivity : AppCompatActivity() {
 
         userRepository.loginUser(auth, email, password) {
             if (it.isSuccessful) {
-                Toast.makeText(this, "Nice, Your Login is Successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
             } else {
                 Toast.makeText(
                     this,
-                    "Your Email or Password is Wrong, CHECK FIRST !!!",
+                    "Email atau Password Salah",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -116,8 +111,7 @@ class LoginActivity : AppCompatActivity() {
                     context = this@LoginActivity,
                 )
                 handleSignIn(result)
-            } catch (e: GetCredentialException) {
-                Log.d("Error", e.message.toString())
+            } catch (_: GetCredentialException) {
             }
         }
     }
@@ -131,18 +125,13 @@ class LoginActivity : AppCompatActivity() {
                         val googleIdTokenCredential =
                             GoogleIdTokenCredential.createFrom(credential.data)
                         firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
-                    } catch (e: GoogleIdTokenParsingException) {
-                        Log.e(TAG, "Received an invalid google id token response", e)
+                    } catch (_: GoogleIdTokenParsingException) {
                     }
                 } else {
-                    // Catch any unrecognized custom credential type here.
-                    Log.e(TAG, "Unexpected type of credential")
                 }
             }
 
             else -> {
-                // Catch any unrecognized credential type here.
-                Log.e(TAG, "Unexpected type of credential")
             }
         }
     }
@@ -225,11 +214,9 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithCredential:success")
                     val user: FirebaseUser? = auth.currentUser
                     updateUI(user)
                 } else {
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
                     updateUI(null)
                 }
             }

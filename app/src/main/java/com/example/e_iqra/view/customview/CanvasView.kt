@@ -1,7 +1,11 @@
 package com.example.e_iqra.view.customview
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Path
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -40,7 +44,6 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         extraCanvas = Canvas(extraBitmap)
         extraCanvas.drawColor(backgroundColor)
 
-        // Memulihkan coretan jika ada
         storedBitmap?.let {
             extraCanvas.drawBitmap(it, 0f, 0f, null)
         }
@@ -48,7 +51,9 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.drawBitmap(extraBitmap, 0f, 0f, null)
+        if (::extraBitmap.isInitialized) {
+            canvas.drawBitmap(extraBitmap, 0f, 0f, null)
+        }
         canvas.drawPath(path, paint)
     }
 
@@ -77,16 +82,29 @@ class CanvasView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     }
 
     fun setBitmap(bitmap: Bitmap) {
-        extraBitmap = Bitmap.createBitmap(bitmap)
+        val mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+
+        if (::extraBitmap.isInitialized) extraBitmap.recycle()
+        extraBitmap = Bitmap.createBitmap(mutableBitmap.width, mutableBitmap.height, Bitmap.Config.ARGB_8888)
         extraCanvas = Canvas(extraBitmap)
+
+        extraCanvas.drawBitmap(mutableBitmap, 0f, 0f, null)
+
         invalidate()
     }
 
     fun getBitmap(): Bitmap {
-        return extraBitmap
+        return if (::extraBitmap.isInitialized) {
+            extraBitmap
+        } else {
+            Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+        }
     }
 
     fun clearCanvas() {
+        if (!::extraCanvas.isInitialized || !::extraBitmap.isInitialized) {
+            return
+        }
         path.reset()
         extraCanvas.drawColor(backgroundColor)
         storedBitmap = null
