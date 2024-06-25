@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/soft_pink"
     tools:context=".view.LoginActivity"
     tools:ignore="VisualLintButtonSize">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +34,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/soft_pink">
+            android:background="#f5fafb">
 
             <TextView
                 android:id="@+id/tv_title_email"
@@ -82,7 +81,7 @@
                 android:paddingEnd="8dp"
                 android:alpha="0"
                 android:gravity="start|center_vertical"
-                android:background="@color/white"
+                android:background="@drawable/btn"
                 android:hint="@string/hint_email"
                 android:minHeight="48dp"
                 app:layout_constraintBottom_toTopOf="@id/tv_title_password"
@@ -104,7 +103,7 @@
                 android:gravity="start|center_vertical"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:background="@color/white"
+                android:background="@drawable/btn"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:minHeight="48dp"

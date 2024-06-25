@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/soft_pink"
     tools:context=".view.RegisterActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,7 +32,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/soft_pink">
+                android:background="#f5fafb">
 
                 <TextView
                     android:id="@+id/tv_title_email"
@@ -96,7 +95,7 @@
                     android:layout_marginEnd="16dp"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:background="@color/white"
+                    android:background="@drawable/btn"
                     android:gravity="start|center_vertical"
                     android:hint="@string/hint_email"
                     android:minHeight="48dp"
@@ -116,7 +115,7 @@
                     android:layout_marginEnd="16dp"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:background="@color/white"
+                    android:background="@drawable/btn"
                     android:gravity="start|center_vertical"
                     android:hint="@string/hint_name"
                     android:minHeight="48dp"
@@ -136,7 +135,7 @@
                     android:layout_marginBottom="16dp"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:background="@color/white"
+                    android:background="@drawable/btn"
                     android:gravity="start|center_vertical"
                     android:layout_marginTop="8dp"
                     android:inputType="textPassword"
@@ -157,6 +156,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
+                    android:textColor="@color/white"
                     android:layout_marginBottom="16dp"
                     android:alpha="0"
                     tools:alpha="100"

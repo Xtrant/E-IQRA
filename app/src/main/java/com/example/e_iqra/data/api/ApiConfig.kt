@@ -1,14 +1,13 @@
 package com.example.e_iqra.data.api
 
+import com.example.e_iqra.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.example.e_iqra.BuildConfig
 
 class ApiConfig {
-
     fun getApiService(token: String): ApiService {
         val loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -27,7 +26,7 @@ class ApiConfig {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://model-api-j62sigqpvq-et.a.run.app/")
+            .baseUrl("https://iqro-api-j62sigqpvq-et.a.run.app")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

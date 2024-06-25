@@ -1,17 +1,15 @@
 package com.example.e_iqra.data.adapter
 
 import android.content.Context
-import android.os.Bundle
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.e_iqra.R
 import com.example.e_iqra.data.api.DoaResponseItem
 import com.example.e_iqra.databinding.ItemArticleBinding
-import com.example.e_iqra.view.main.ui.home.detail.DoaDetailFragment
+import com.example.e_iqra.view.main.ui.home.detail.DoaDetailActivity
 
 class DoaAdapter(private val context: Context) : ListAdapter<DoaResponseItem, DoaAdapter.DoaViewHolder>(DIFF_CALLBACK) {
 
@@ -41,13 +39,13 @@ class DoaAdapter(private val context: Context) : ListAdapter<DoaResponseItem, Do
         fun bind(doaItem: DoaResponseItem) {
             binding.textViewDoa.text = doaItem.doa
             binding.root.setOnClickListener {
-                val bundle = Bundle().apply {
-                    putString(DoaDetailFragment.EXTRA_DOA, doaItem.doa)
-                    putString(DoaDetailFragment.EXTRA_AYAT, doaItem.ayat)
-                    putString(DoaDetailFragment.EXTRA_LATIN, doaItem.latin)
-                    putString(DoaDetailFragment.EXTRA_ARTINYA, doaItem.artinya)
+                val intent = Intent(context, DoaDetailActivity::class.java).apply {
+                    putExtra(DoaDetailActivity.EXTRA_DOA, doaItem.doa)
+                    putExtra(DoaDetailActivity.EXTRA_AYAT, doaItem.ayat)
+                    putExtra(DoaDetailActivity.EXTRA_LATIN, doaItem.latin)
+                    putExtra(DoaDetailActivity.EXTRA_ARTINYA, doaItem.artinya)
                 }
-                it.findNavController().navigate(R.id.action_navigation_home_to_doaDetailFragment, bundle)
+                context.startActivity(intent)
             }
         }
     }

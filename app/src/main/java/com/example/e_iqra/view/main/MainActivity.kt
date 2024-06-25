@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = binding.navView
         bottomNavigationView.setupWithNavController(navController)
 
+
+        @Suppress("DEPRECATION")
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.mobile_navigation, false)
@@ -37,12 +39,12 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.navigation_home, null, navOptions)
                     true
                 }
-                R.id.navigation_dashboard -> {
-                    navController.navigate(R.id.navigation_dashboard, null, navOptions)
+                R.id.navigation_learn -> {
+                    navController.navigate(R.id.navigation_learn, null, navOptions)
                     true
                 }
-                R.id.navigation_notifications -> {
-                    navController.navigate(R.id.navigation_notifications, null, navOptions)
+                R.id.navigation_profile -> {
+                    navController.navigate(R.id.navigation_profile, null, navOptions)
                     true
                 }
                 else -> false
